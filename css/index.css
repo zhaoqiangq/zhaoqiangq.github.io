@@ -1,0 +1,45 @@
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none; }
+
+.header {
+  width: 100%;
+  height: 70px;
+  background: url(../images/back01.png) repeat-x left top; }
+  .header .he-conter {
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    background: url(../images/back02.png) no-repeat left top; }
+    .header .he-conter h1 {
+      width: 210px;
+      height: 100%;
+      background: url(../images/logo.png) no-repeat left center;
+      float: left; }
+    .header .he-conter .nav {
+      float: right;
+      line-height: 100%;
+      width: auto; }
+      .header .he-conter .nav li {
+        height: 100%;
+        line-height: 70px;
+        display: inline-block; }
+        .header .he-conter .nav li a {
+          padding: 10px 29px;
+          font-size: 16px;
+          line-height: 16px;
+          border-radius: 18px;
+          color: #000; }
+          .header .he-conter .nav li a.active {
+            color: #fff;
+            background-color: #e75c77;
+            box-shadow: 2px 2px 1px #c42f4c inset; }
+
+.title {
+  width: 100%;
+  min-height: 444px;
+  max-height: 696px;
+  background: url(../images/back03.jpg) repeat-x left top;
+  position: relative; }
