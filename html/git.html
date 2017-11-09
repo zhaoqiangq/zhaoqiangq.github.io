@@ -11,21 +11,209 @@
 <body style=" background: url(../images/back01.png)repeat">
 <div class="header"><h1></h1></div>
 <div class="inner">
-    <div class="msg">
-        <div class="title">
-            2015年06月16日 星期二
-        </div>
-        <h3>Git 简介、命令行</h3>
-        <div class="font">
-            <div class="size">
-                <h4>技术简介 :</h4>
-                <p>Git是目前世界上最先进的分布式版本控制系统（没有之一）。
-
-                    Git有什么特点？简单来说就是：高端大气上档次！
-
-                    那什么是版本控制系统？
-
-                    如果你用Microsoft Word写过长篇大论，那你一定有这样的经历</p>
+    <div class="msg-box">
+        <div class="msg">
+            <div class="title">2017年11月09日 星期四</div>
+            <h3>Git 简介、命令行</h3>
+            <div class="font">
+                <div class="size">
+                    <h4>技术简介 :</h4>
+                    <p>
+                        Git是目前世界上最先进的分布式版本控制系统<br>
+                       <h6>一、安装git</h6>
+                        1、在Mac OS X上安装Git<br>
+                        第一种是安装homebrew，然后通过homebrew安装Git，具体方法请参考homebrew的文档：<a href="http://brew.sh/">http://brew.sh/</a><br>
+                        第二种方法更简单，也是推荐的方法，就是直接从AppStore安装Xcode，Xcode集成了Git，不过默认没有安装，你需要运行Xcode，选择菜单“Xcode”->“Preferences”，在弹出窗口中找到“Downloads”，选择“Command Line Tools”，点“Install”就可以完成安装了。
+                        <br>2、在Windows上安装Git<br>
+                        msysgit是Windows版的Git，从 <a href="https://git-for-windows.github.io">https://git-for-windows.github.io</a>下载（网速慢的同学请移步国内镜像），然后按默认选项安装即可。
+                    </p>
+                    <p>
+                        <h6>二、git切换创建</h6>
+                        <br>1、切换D盘
+                        <span>cd d:</span>
+                        2、返回上一层
+                        <span>cd ..</span>
+                        3、查看文件夹内容
+                        <span>ls</span>
+                        4、当前的目录
+                        <span>pwd</span>
+                        5、创建文件夹
+                        <span>mkdir name</span>
+                        6、生成一个可供发布的压缩包
+                        <span>git archive</span>
+                    </p>
+                    <p>
+                        <h6>三、git新建代码库</h6>
+                        <br>1、在当前目录新建一个Git代码库
+                        <span>git init</span>
+                        2、 新建一个目录，将其初始化为Git代码库
+                        <span>git init [project-name]</span>
+                        3、下载一个项目和它的整个代码历史
+                        <span>git clone [url]</span>
+                    </p>
+                    <p>
+                        <h6>四、配置</h6>
+                        <br>1、显示当前的Git配置
+                        <span>git config --list</span>
+                        2、编辑Git配置文件
+                        <span>git config -e [--global]</span>
+                        3、设置提交代码时的用户信息
+                        <span>git config [--global] user.name "[name]"</span>
+                        <span>git config [--global] user.email "[email address]"</span>
+                    </p>
+                    <p>
+                        <h6>五、增加/删除文件</h6>
+                        1、添加指定文件到暂存区
+                        <span>git add [file1] [file2] ...</span>
+                        2、添加指定目录到暂存区，包括子目录
+                        <span>git add [dir]</span>
+                        3、添加当前目录的所有文件到暂存区
+                        <span>git add .</span>
+                        4、添加每个变化前，都会要求确认<br>
+                        对于同一个文件的多处变化，可以实现分次提交
+                        <span>git add -p</span>
+                        5、删除暂存区有的文件，而工作区没有的文件
+                        <span>git rm [file1] [file2] ...</span>
+                        6、删除工作区暂存区文件
+                        <span>git rm -f [file1]</span>
+                        7、只删除暂存区的文件
+                        <span>git rm --cached [file]</span>
+                        8、改名文件，并且将这个改名放入暂存区
+                        <span>git mv [file-original] [file-renamed]</span>
+                    </p>
+                    <p>
+                        <h6>六、代码提交</h6>
+                        1、提交暂存区到仓库区
+                        <span>git commit -m [message]</span>
+                        2、提交暂存区的指定文件到仓库区
+                        <span>git commit [file1] [file2] ... -m [zhushi]</span>
+                        3、提交工作区自上次commit之后的变化，直接到仓库区
+                        <span>git commit -a -m[zhushi]</span>
+                        4、提交时显示所有diff信息
+                        <span>git commit -v</span>
+                        5、使用一次新的commit，替代上一次提交<br>
+                        如果代码没有任何新变化，则用来改写上一次commit的提交信息
+                        <span>git commit --amend -m [message]</span>
+                        6、重做上一次commit，并包括指定文件的新变化
+                        <span>git commit --amend [file1] [file2] ...</span>
+                    </p>
+                    <p>
+                        <h6>七、分支</h6>
+                        1、列出所有本地分支
+                        <span>git branch</span>
+                        2、列出所有远程分支
+                        <span>git branch -r</span>
+                        3、列出所有本地分支和远程分支
+                        <span>git branch -a</span>
+                        4、新建一个分支，但依然停留在当前分支
+                        <span>git branch [branch-name]</span>
+                        5、新建一个分支，并切换到该分支
+                        <span>git checkout -b [branch]</span>
+                        6、新建一个分支，指向指定commit
+                        <span>git branch [branch] [commit]</span>
+                        7、新建一个分支，与指定的远程分支建立追踪关系
+                        <span>git branch --track [branch] [remote-branch]</span>
+                        8、切换到指定分支，并更新工作区
+                        <span>git checkout [branch-name]</span>
+                        9、切换到上一个分支
+                        <span>git checkout -</span>
+                        10、建立追踪关系，在现有分支与指定的远程分支之间
+                        <span>git branch --set-upstream [branch] [remote-branch]</span>
+                        11、合并指定分支到当前分支
+                        <span>git merge [branch]</span>
+                        12、选择一个commit，合并进当前分支
+                        <span>git cherry-pick [commit]</span>
+                        13、删除分支
+                        <span>git branch -d [branch-name]</span>
+                        14、强行删除分支
+                        <span>git branch -D [branch-name]</span>
+                        15、删除远程分支
+                        <span>git push origin --delete [branch-name]</span>
+                        <span>git branch -dr [remote/branch]</span>
+                    </p>
+                    <p>
+                        <h6>八、标签</h6>
+                        1、列出所有tag
+                        <span>git tag</span>
+                        2、新建一个tag在当前commit
+                        <span>git tag [tag-name]</span>
+                        3、新建一个tag在指定commit
+                        <span>git tag [tag-name] [commit]</span>
+                        4、删除本地tag
+                        <span>git tag -d [tag]</span>
+                        5、删除远程tag
+                        <span>git push origin :refs/tags/[tagName]</span>
+                        6、查看tag信息
+                        <span>git show [tag]</span>
+                        7、提交指定tag
+                        <span>git push [仓库名] [tag-name]</span>
+                        8、提交所有tag
+                        <span> git push [remote] --tags</span>
+                        9、新建一个分支，指向某个tag
+                        <span>git checkout -b [branch] [tag]</span>
+                    </p>
+                    <p>
+                        <h6>九、查看信息</h6>
+                        1、显示有变更的文件
+                        <span>git status</span>
+                        2、显示当前分支的版本历史
+                        <span> git log</span>
+                        3、显示commit历史，以及每次commit发生变更的文件
+                        <span>git log --stat</span>
+                        4、搜索提交历史，根据关键词
+                        <span>git log -S [keyword]</span>
+                        5、显示指定文件相关的每一次diff
+                        <span>git log -p [file]</span>
+                        6、显示过去5次提交
+                        <span>git log -5 --pretty --oneline</span>
+                        7、显示暂存区和工作区的差异
+                        <span>git diff</span>
+                        8、显示暂存区和上一个commit的差异
+                        <span>git diff --cached [file]</span>
+                        9、显示工作区与当前分支最新commit之间的差异
+                        <span>git diff HEAD</span>
+                        10、显示今天你写了多少行代码
+                        <span>git diff --shortstat "@{0 day ago}"</span>
+                        11、显示所有  的提交
+                        <span>git reflog</span>
+                    </p>
+                    <p>
+                        <h6>十、远程同步</h6>
+                        1、更新线上代码 默认不合并
+                        <span>git fetch </span>
+                        2、显示所有远程仓库
+                        <span>git remote -v</span>
+                        3、更新线上代码
+                        <span>git pull</span>
+                        4、推送所有分支到远程仓库
+                        <span>git push [remote] --all</span>
+                    </p>
+                    <p>
+                        <h6>十一、撤销</h6>
+                        1、恢复暂存区的指定文件到工作区
+                        <span>git checkout [file]</span>
+                        2、恢复某个commit的指定文件到暂存区和工作区
+                        <span>git checkout [commit] [file]</span>
+                        3、恢复暂存区的所有文件到工作区
+                        <span>git checkout .</span>
+                        4、重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
+                        <span>git reset [file]</span>
+                        5、重置暂存区与工作区，与上一次commit保持一致
+                        <span>git reset --hard</span>
+                        6、重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
+                        <span>git reset [commit]</span>
+                        7、重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
+                        <span>git reset --hard [commit]</span>
+                        8、重置当前HEAD为指定commit，但保持暂存区和工作区不变
+                        <span>git reset --keep [commit]</span>
+                        9、新建一个commit，用来撤销指定commit
+                        <br>后者的所有变化都将被前者抵消，并且应用到当前分支
+                        <span>git revert [commit]</span>
+                        10、暂时将未提交的变化移除，稍后再移入
+                        <span> git stash</span>
+                        <span>git stash pop</span>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
