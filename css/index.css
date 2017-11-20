@@ -127,12 +127,30 @@ body {
           letter-spacing: 1px !important;
           line-height: 30px;
           text-align: left; }
+          .inner .msg-box .msg .font .size li {
+            margin-top: 15px;
+            height: 30px;
+            overflow: hidden; }
+          .inner .msg-box .msg .font .size li.active {
+            height: auto;
+            overflow: auto; }
           .inner .msg-box .msg .font .size p {
             margin-top: 30px; }
           .inner .msg-box .msg .font .size h4 {
             margin-bottom: 15px; }
           .inner .msg-box .msg .font .size a {
             color: #0b0080; }
+          .inner .msg-box .msg .font .size i {
+            display: block;
+            width: 50px;
+            height: 20px;
+            text-align: center;
+            line-height: 18px;
+            background: #ccc;
+            color: #fff;
+            cursor: pointer;
+            font-style: normal;
+            font-size: 20px; }
           .inner .msg-box .msg .font .size span {
             color: #4b4b4b;
             padding-left: 50px;
@@ -140,4 +158,5 @@ body {
             background-color: #e2dcdc;
             margin: 5px 0; }
           .inner .msg-box .msg .font .size h6 {
-            font-size: 20px; }
+            font-size: 20px;
+            cursor: pointer; }

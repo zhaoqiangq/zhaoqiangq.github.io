@@ -7,6 +7,43 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../css/index.css">
     <title>ES6</title>
+    <style>
+        span{
+            height: 0;
+            overflow: hidden;
+        }
+    </style>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+    <script>
+       $(function () {
+           $('i').on('click',function () {
+               if($(this).hasClass('active')){
+                   $(this).removeClass('active');
+                   $(this).text('+');
+                   $(this).next('span').css({
+                       'height':'0',
+                       'overflow':'hidden'
+                   })
+               }else{
+                   $(this).addClass('active');
+                   $(this).text('-');
+                   $(this).next('span').css({
+                       'height':'auto',
+                       'overflow':'auto'
+                   })
+               }
+           })
+           $('h6').on('click',function () {
+               if($(this).hasClass('active')){
+                   $(this).removeClass('active');
+                   $(this).parent('li').removeClass('active')
+               }else{
+                   $(this).addClass('active');
+                   $(this).parent('li').addClass('active')
+               }
+           })
+       })
+    </script>
 </head>
 <body style=" background: url(../images/back01.png)repeat">
 <div class="header"><h1></h1></div>
@@ -14,29 +51,32 @@
     <div class="msg-box">
         <div class="msg">
             <div class="title">2017年11月19日 星期日</div>
-            <h3>base.css</h3>
+            <h3>ES6</h3>
             <div class="font">
                 <div class="size">
                     <h4>技术简介 :</h4>
                     <h6>ES6</h6>
                     ESMAscript6.0(简称ES6)，是继ESMAscript5.1之后的下一代Javascript语言的下一代标准，发布在2015年6月，它的目标是用JavaScript语言来编写复杂的大型应用程序，成为企业级开发语言。
-                    <p>
-                    一、let命令<br>
-                        1、使用let命令声明的变量，只有在代码块里有效<br>
-                        2、使用let变量不会被提升<br>
-                        3、暂时性死区（只要块级作用域内存在let命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响）；
-                        <span>
-                                let f = 10;  <br>
+                    <ul>
+                        <li>
+                            <h6>一、let命令</h6>
+                            1、使用let命令声明的变量，只有在代码块里有效<br>
+                            2、使用let变量不会被提升<br>
+                            3、暂时性死区（只要块级作用域内存在let命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响）；
+                            <i>+</i>
+                            <span>
+                               let f = 10;  <br>
                                 function fn() {<br>
                                  &nbsp;&nbsp;   f = 7;<br>
                                  &nbsp;&nbsp;  let f = 2;<br>
                                 }<br>
                                 fn() //error
                         </span>
-                        4、在同一作用域下不允许声明已经存在的变量<br>
-                        5、let在循环语句的应用<br>
-                        变量i是let声明的，当前的i只在本轮循环有效，所以每一次循环的i其实都是一个新的变量
-                        <span>
+                            4、在同一作用域下不允许声明已经存在的变量<br>
+                            5、let在循环语句的应用<br>
+                            变量i是let声明的，当前的i只在本轮循环有效，所以每一次循环的i其实都是一个新的变量
+                            <i>+</i>
+                            <span>
                             var a = [];<br>
                             for (let i = 0; i < 10; i++) {<br>
                              &nbsp;&nbsp; a[i] = function () {<br>
@@ -45,33 +85,409 @@
                             }<br>
                             a[6](); // 6<br>
                         </span>
-                        6、在循环语句之内是一个父作用域、而在循环体之中是一个子作用域
-                        <br>(let声明的变量不会泄露到作用域之外的)
-                           <span>
+                            6、在循环语句之内是一个父作用域、而在循环体之中是一个子作用域
+                            <br>(let声明的变量不会泄露到作用域之外的)
+                            <i>+</i>
+                            <span>
 
                            for (let i=0;i<9;i++)//父作用域{ <br>
                         &nbsp;&nbsp;let i =10;       //子作用域<br>
                         &nbsp;&nbsp;console.log(i)//3次10<br>
                             }<br>
                                </span>
-                    </p>
-                    <p>
-                        二、const命令 常量<br>
-                        const命令同样有let的1/2/3特点，<br>
-                        1、所声明的变量只在其所在的代码块里有效<br>
-                        2、声明的变量不会被提升<br>
-                        3、不能声明已经被声明过的变量<br>
-                        4、声明的时候必须赋值<br>
-                        5、声明的常量在简单的数据类型的时候不可改变其值，如果储存的是对象，
-                        那么引用不可以被改变，只有对象里面的数据如何变化，是没有关系的
-                        <span>
+                        </li>
+                        <li>
+                            <h6> 二、const命令 常量<br></h6>
+                            const命令同样有let的1/2/3特点，<br>
+                            1、所声明的变量只在其所在的代码块里有效<br>
+                            2、声明的变量不会被提升<br>
+                            3、不能声明已经被声明过的变量<br>
+                            4、声明的时候必须赋值<br>
+                            5、声明的常量在简单的数据类型的时候不可改变其值，如果储存的是对象，
+                            那么引用不可以被改变，只有对象里面的数据如何变化，是没有关系的
+                            <i>+</i>
+                            <span>
+                            //对象<br>
                             const a = 1;<br>
                             a = {};//error<br>
                             const obj = {a:10};<br>
                             obj.a = 20;<br>
                             console.log(obj);// a = 20;<br>
+                            const a = [];<br>
+                            //数组<br>
+                            a.push('Hello'); // 可执行<br>
+                            a.length = 0;    // 可执行<br>
+                            a = ['Dave'];    // 报错<br>
                         </span>
-                    </p>
+                        </li>
+                        <li>
+                            <h6>三、解构赋值</h6>
+                            ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构<br>
+                            1、变量赋值<br>
+                            可以从数组中提取值，按照对应位置，对变量赋值。只要等号两边的模式相同，左边的变量就会被赋予对应的值。
+                            <i>+</i>
+                            <span>let [a, b, c] = [1, 2, 3];</span>
+                            2、嵌套数组进行解构
+                            <i>+</i>
+                            <span>
+                        let [foo, [[bar], baz]] = [1, [[2], 3]];<br>
+                        foo // 1<br>
+                        bar // 2<br>
+                        baz // 3<br>
+                        &nbsp;<br>
+                        let [ , , third] = ["foo", "bar", "baz"];<br>
+                        third // "baz"<br>
+                                   &nbsp;<br>
+                        let [x, , y] = [1, 2, 3];<br>
+                        x // 1<br>
+                        y // 3<br>
+                         &nbsp;<br>
+                        let [head, ...tail] = [1, 2, 3, 4];<br>
+                        head // 1<br>
+                        tail // [2, 3, 4]<br>
+                         &nbsp;<br>
+                        let [x, y, ...z] = ['a'];<br>
+                        x // "a"<br>
+                        y // undefined<br>
+                        z // []<br>
+                        </span>
+                            如果解构不成功，变量的值就等于undefined。<br>
+                            3、默认值<br>
+                            解构赋值允许指定默认值。
+                            <i>+</i>
+                            <span>
+                            let [foo = true] = [];<br>
+                            foo // true<br>
+
+                            let [x, y = 'b'] = ['a']; // x='a', y='b'<br>
+                            let [x, y = 'b'] = ['a', undefined]; // x='a', y='b'<br>
+                        </span>
+                            注意，ES6 内部使用严格相等运算符（===），判断一个位置是否有值。所以，如果一个数组成员不严格等于undefined，默认值是不会生效的。
+                            <i>+</i>
+                            <span>
+                            let [x = 1] = [undefined];<br>
+                            x // 1<br>
+                            let [x = 1] = [null];<br>
+                            x // null<br>
+                        </span>
+                            上面代码中，如果一个数组成员是null，默认值就不会生效，因为null不严格等于undefined。
+                            <i>+</i>
+                            <span>
+                            let [x = 1, y = x] = [];     // x=1; y=1<br>
+                            let [x = 1, y = x] = [2];    // x=2; y=2<br>
+                            let [x = 1, y = x] = [1, 2]; // x=1; y=2<br>
+                            let [x = y, y = 1] = [];     // ReferenceError<br>
+                        </span>
+                            上面最后一个表达式之所以会报错，是因为x用到默认值y时，y还没有声明。<br>
+                            4、对象的解构赋值<br>
+                            解构不仅可以用于数组，还可以用于对象。
+                            <i>+</i>
+                            <span>
+                            let { foo, bar } = { foo: "aaa", bar: "bbb" };<br>
+                            foo // "aaa"<br>
+                            bar // "bbb<br>
+                        </span>
+                            对象的解构与数组有一个重要的不同。数组的元素是按次序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值。
+                            <i>+</i>
+                            <span>
+                            let { bar, foo } = { foo: "aaa", bar: "bbb" };<br>
+                            foo // "aaa"<br>
+                            bar // "bbb"<br>
+                            &nbsp;<br>
+                            let { baz } = { foo: "aaa", bar: "bbb" };<br>
+                            baz // undefined<br>
+                            // 没有对应的同名属性，导致取不到值，最后等于undefin   ed。<br>
+                        </span>
+                            如果变量名与属性名不一致
+                            <i>+</i>
+                            <span>
+                            let { foo: baz } = { foo: 'aaa', bar: 'bbb' };<br>
+                            baz // "aaa"
+                        </span>
+                            也就是说，对象的解构赋值的内部机制，是先找到同名属性，然后再赋给对应的变量。真正被赋值的是后者，而不是前者。
+
+                            <i>+</i>     <span>
+                            let { foo: baz } = { foo: "aaa", bar: "bbb" };<br>
+                            baz // "aaa"<br>
+                            foo // error: foo is not defined<br>
+                        </span>
+                            上面代码中，foo是匹配的模式，baz才是变量。真正被赋值的是变量baz，而不是模式foo。<br>
+                            5、对象的解构也可以指定默认值。
+                            <i>+</i>    <span>
+                            var {x = 3} = {};<br>
+                            x // 3<br>
+
+                            var {x, y = 5} = {x: 1};<br>
+                            x // 1<br>
+                            y // 5<br>
+
+                            var {x: y = 3} = {};<br>
+                            y // 3<br>
+
+                            var {x: y = 3} = {x: 5};<br>
+                            y // 5<br>
+                        </span>
+                            6、默认值生效的条件是，对象的属性值严格等于undefined。
+                            <i>+</i>   <span>
+                        var {x = 3} = {x: undefined};<br>
+                        x // 3<br>
+
+                        var {x = 3} = {x: null};<br>
+                        x // null<br>
+                        </span>
+                            7、数组本质是特殊的对象，因此可以对数组进行对象属性的解构。
+                            <i>+</i>  <span>
+                            let arr = [1, 2, 3];<br>
+                            let {0 : first, [arr.length - 1] : last} = arr;<br>
+                            first // 1<br>
+                            last // 3<br>
+                        </span>
+                            上面代码对数组进行对象解构。数组arr的0键对应的值是1，[arr.length - 1]就是2键，对应的值是3。
+
+                        </li>
+                        <li>
+                            <h6>四、字符串解构赋值</h6>
+                            字符串也可以解构赋值。这是因为此时，字符串被转换成了一个类似数组的对象。
+                            <i>+</i>
+                            <span>
+                            const [a, b, c, d, e] = 'hello';<br>
+                            a // "h"<br>
+                            b // "e"<br>
+                            c // "l"<br>
+                            d // "l"<br>
+                            e // "o"<br>
+                        </span>
+                            类似数组的对象都有一个length属性，因此还可以对这个属性解构赋值。
+                            <i>+</i>
+                            <span>
+                            let {length : len} = 'hello';<br>
+                            len // 5<br>
+                        </span>
+                        </li>
+                        <li>
+                            <h6>五、数值和布尔值的解构赋值</h6>
+                            解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。
+                            <i>+</i>
+                            <span>
+                            let {toString: s} = 123;<br>
+                            s === Number.prototype.toString // true<br>
+
+                            let {toString: s} = true;<br>
+                            s === Boolean.prototype.toString // true<br>
+                        </span>
+                            上面代码中，数值和布尔值的包装对象都有toString属性，因此变量s都能取到值。
+                            <i>+</i>
+                            <span>
+                            let { prop: x } = undefined; // TypeError<br>
+                            let { prop: y } = null; // TypeError<br>
+                        </span>
+                            解构赋值的规则是，只要等号右边的值不是对象或数组，就先将其转为对象。由于undefined和null无法转为对象，所以对它们进行解构赋值，都会报错。
+
+                        </li>
+                        <li>
+                            <h6>六、函数参数的解构赋值</h6>
+                            函数的参数也可以使用解构赋值。
+                            <i>+</i>
+                            <span>
+                            function add([x, y]){<br>
+                              return x + y;<br>
+                            }<br>
+                            add([1, 2]); // 3
+                        </span>
+                            函数参数的解构也可以使用默认值。
+                            <i>+</i>
+                            <span>
+                            function move({x = 0, y = 0} = {}) {<br>
+                             &nbsp;&nbsp; return [x, y];<br>
+                            }<br>
+
+                            move({x: 3, y: 8}); // [3, 8]<br>
+                            move({x: 3}); // [3, 0]<br>
+                            move({}); // [0, 0]<br>
+                            move(); // [0, 0]<br>
+                        </span>
+                        </li>
+                        <li>
+                            <h6>七、用途</h6>
+                            变量的解构赋值用途很多。<br>
+                            (1)、变化变量的值
+                            <i>+</i>
+                            <span>
+                            let x = 1;<br>
+                            let y = 2;<br>
+                            [x,y]=[y,x];<br>
+                        </span>
+                            上面代码交换变量x和y的值，这样的写法不仅简洁，而且易读，语义非常清晰。
+                            <br>(2)、从函数返回多个值<br>
+                            函数只能返回一个值，如果要返回多个值，只能将它们放在数组和对象里返回。有了解构赋值，取这些值就非常方便。
+                            <br>
+                            <i>+</i>
+                            <span>
+                            //返回一个数组<br>
+                            function example(){<br>
+                                return [1,2,3]<br>
+                            }<br>
+                            let [a,b,c] = example();<br>
+                            //返回一个对象<br>
+                            function example(){<br>
+                              &nbsp;&nbsp;return{<br>
+                              &nbsp;&nbsp;&nbsp;&nbsp;foo:1,<br>
+                              &nbsp;&nbsp;&nbsp;&nbsp;bar:2<br>
+                              &nbsp;&nbsp;};<br>
+                            }<br>
+                            let {foo,bar} = example();
+                        </span>
+                            (3)、函数参数的定义<br>
+                            解构赋值可以方便地将一组参数与变量名对应起来。
+                            <i>+</i>
+                            <span>
+                            // 参数是一组有次序的值<br>
+                            function f([x, y, z]) { ... }<br>
+                            f([1, 2, 3]);<br>
+
+                            // 参数是一组无次序的值<br>
+                            function f({x, y, z}) { ... }<br>
+                            f({z: 3, y: 2, x: 1});<br>
+                        </span>
+                            (4)、提取JSON数据<br>
+                            解构赋值对提取JSON对象中的数据，尤其有用
+                            <i>+</i>
+                            <span>
+                            let jsonData = {<br>
+                             &nbsp;&nbsp;id: 42,<br>
+                              &nbsp;&nbsp;status: "OK",<br>
+                              &nbsp;&nbsp;data: [867, 5309]<br>
+                            };<br>
+
+                            let { id, status, data: number } = jsonData;<br>
+
+                            console.log(id, status, number);<br>
+                            // 42, "OK", [867, 5309]<br>
+                        </span>
+                            (5)、函数参数的默认值<br>
+                            <i>+</i>
+                            <span>
+                            jQuery.ajax = function (url, {<br>
+                               &nbsp;&nbsp;async = true,<br>
+                               &nbsp;&nbsp;beforeSend = function () {},<br>
+                               &nbsp;&nbsp;cache = true,<br>
+                               &nbsp;&nbsp;complete = function () {},<br>
+                               &nbsp;&nbsp;crossDomain = false,<br>
+                               &nbsp;&nbsp;global = true,<br>
+                               &nbsp;&nbsp;// ... more config<br>
+                            }) {<br>
+                               &nbsp;&nbsp;// ... do stuff<br>
+                            };<br>
+                        </span>
+                            (6)、遍历Map解构<br>
+                            任何部署了 Iterator 接口的对象，都可以用for...of循环遍历。Map 结构原生支持 Iterator 接口，配合变量的解构赋值，获取键名和键值就非常方便。
+                            <i>+</i>  <span>
+                            const map = new Map();<br>
+                            map.set('first', 'hello');<br>
+                            map.set('second', 'world');<br>
+                            <br>
+                            for (let [key, value] of map) {<br>
+                              console.log(key + " is " + value);<br>
+                            }<br>
+                            // first is hello<br>
+                            // second is world<br>
+                        </span>
+                            如果只想获取键名，或者只想获取键值，可以写成下面这样。
+                            <i>+</i> <span>
+                            // 获取键名<br>
+                            for (let [key] of map) {<br>
+                              // ...<br>
+                            }<br>
+
+                            // 获取键值<br>
+                            for (let [,value] of map) {<br>
+                              // ...<br>
+                            }<br>
+                        </span>
+                            (7)、输入模块的指定方法<br>
+                            加载模块时，往往需要指定输入哪些方法。解构赋值使得输入语句非常清晰。
+                            <i>+</i> <span>
+                            const { SourceMapConsumer, SourceNode } = require("source-map");
+                        </span>
+                        </li>
+                        <li class="active">
+                            <h6>字符串扩展</h6>
+                              1、  ES6为字符串添加了遍历器接口，使得字符串可以被for.....of循环遍历
+                            <i>+</i>
+                            <span>
+                                for (let i of 'foo') {<br>
+                                &nbsp;&nbsp;console.log(i)<br>
+                                }<br>
+                                // "f"<br>
+                                // "o"<br>
+                                // "o"<br>
+                            </span>
+                            2、includes(), startsWith(), endsWith()<br>
+                            JavaScript 只有indexOf方法，可以用来确定一个字符串是否包含在另一个字符串中<br>
+                            includes()：返回布尔值，表示是否找到了参数字符串。<br>
+                            startsWith()：返回布尔值，表示参数字符串是否在原字符串的头部。<br>
+                            endsWith()：返回布尔值，表示参数字符串是否在原字符串的尾部。<br>
+                            <i>+</i>
+                            <span>
+                                let s = 'Hello world!';<br>
+                                s.includes('o') // true<br>
+                                s.startsWith('Hello') // true<br>
+                                s.endsWith('H') // true<br>
+                            </span>
+                            这三个方法都支持第二个参数，表示开始搜索的位置。
+                            <i>+</i>
+                            <span>
+                                let s = 'Hello world!';<br>
+                                s.startsWith('world', 6) // true<br>
+                                s.endsWith('Hello', 5) // true<br>
+                                s.includes('Hello', 6) // false<br>
+                            </span>
+                            使用第二个参数n时，endsWith的行为与其他两个方法有所不同。它针对前n个字符，而其他两个方法针对从第n个位置直到字符串结束。
+                            <br>3、repeat()<br>
+                            repeat方法返回一个新字符串，表示将原字符串重复n次。
+                            <i>+</i>
+                            <span>
+                                'x'.repeat(3) // "xxx"<br>
+                                'hello'.repeat(2) // "hellohello"<br>
+                                'na'.repeat(0) // ""<br>
+                            </span>
+                            参数如果是小数，会被取整。
+                            <i>+</i>
+                            <span>
+                                'na'.repeat(2.9) // "nana"
+                            </span>
+                            如果repeat的参数是负数或者Infinity，会报错。
+                            <i>+</i>
+                            <span>
+                                'na'.repeat(Infinity)<br>
+                                // RangeError<br>
+                                'na'.repeat(-1)<br>
+                                // RangeError<br>
+                            </span>
+                            但是，如果参数是 0 到-1 之间的小数，则等同于 0，这是因为会先进行取整运算。0 到-1 之间的小数，取整以后等于-0，repeat视同为 0。
+                            <i>+</i>
+                            <span>'na'.repeat(-0.9) // ""</span>
+                            参数NaN等同于 0。
+                            <i>+</i>
+                            <span>
+                            'na'.repeat(NaN) // ""
+                            </span>
+                            如果repeat的参数是字符串，则会先转换成数字。
+                            <i>+</i>
+                            <span>'na'.repeat('na') // ""<br>
+                                    'na'.repeat('3') // "nanana"
+                            </span>
+                            4、padStart()，padEnd()<br>
+                            ES2017 引入了字符串补全长度的功能。如果某个字符串不够指定长度，会在头部或尾部补全。padStart()用于头部补全，padEnd()用于尾部补全。
+                            <span>
+                                'x'.padStart(5, 'ab') // 'ababx'<br>
+                                'x'.padStart(4, 'ab') // 'abax'<br>
+
+                                'x'.padEnd(5, 'ab') // 'xabab'<br>
+                                'x'.padEnd(4, 'ab') // 'xaba'<br>
+                            </span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -79,3 +495,4 @@
 </div>
 </body>
 </html>
+

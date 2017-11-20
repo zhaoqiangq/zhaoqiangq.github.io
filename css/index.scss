@@ -139,15 +139,35 @@ body{
        letter-spacing: 1px!important;
        line-height: 30px;
        text-align: left;
+       li{
+         margin-top: 15px;
+         height: 30px;
+         overflow: hidden;
+       }
+       li.active{
+       height:auto;
+       overflow:auto;
+       }
        p{
          margin-top: 30px;
        }
        h4{
          margin-bottom: 15px;
-         position: fixed;
        }
        a{
          color: #0b0080;
+       }
+       i{
+         display: block;
+         width: 50px;
+         height: 20px;
+         text-align: center;
+         line-height: 18px;
+        background: #ccc;
+         color: #fff;
+         cursor: pointer;
+         font-style: normal;
+         font-size: 20px;
        }
        span{
          color: #4b4b4b;
@@ -158,6 +178,7 @@ body{
        }
        h6{
          font-size: 20px;
+         cursor: pointer;
        }
      }
     }
