@@ -42,6 +42,11 @@
                    $(this).parent('li').addClass('active')
                }
            })
+
+           $('img').parent('span').css({
+               'padding-left':0,
+               'background':'none'
+           })
        })
     </script>
 </head>
@@ -410,8 +415,8 @@
                             const { SourceMapConsumer, SourceNode } = require("source-map");
                         </span>
                         </li>
-                        <li class="active">
-                            <h6>字符串扩展</h6>
+                        <li>
+                            <h6>八、字符串扩展</h6>
                               1、  ES6为字符串添加了遍历器接口，使得字符串可以被for.....of循环遍历
                             <i>+</i>
                             <span>
@@ -479,12 +484,323 @@
                             </span>
                             4、padStart()，padEnd()<br>
                             ES2017 引入了字符串补全长度的功能。如果某个字符串不够指定长度，会在头部或尾部补全。padStart()用于头部补全，padEnd()用于尾部补全。
+                            <i>+</i>
                             <span>
                                 'x'.padStart(5, 'ab') // 'ababx'<br>
                                 'x'.padStart(4, 'ab') // 'abax'<br>
 
                                 'x'.padEnd(5, 'ab') // 'xabab'<br>
                                 'x'.padEnd(4, 'ab') // 'xaba'<br>
+                            </span>
+                             (1)如果原字符串的长度，等于或大于指定的最小长度，则返回原字符串<br>
+                             (2) 如果省略第二个参数，默认使用空格补全长度<br>
+                             (3) padStart的常见用途为数值补全指定位数
+                            <i>+</i>
+                            <span>
+                                '1'.padStart(10, '0') // "0000000001"<br>
+                                '12'.padStart(10, '0') // "0000000012"<br>
+                                 '123456'.padStart(10, '0') // "0000123456"<br>
+                            </span>
+                            (4)另一个用途是提示字符串格式。
+                            <i>+</i>
+                            <span>
+                                '12'.padStart(10, 'YYYY-MM-DD') // "YYYY-MM-12"<br>
+                                '09-12'.padStart(10, 'YYYY-MM-DD') // "YYYY-09-12"
+                            </span>
+                            5、模板字符串<br>
+                           (1) 传统的JavaScript语言，输出模板通常是这样写的。
+                            <i>+</i>
+                            <span>
+                                $('#result').append(<br>
+                                  &nbsp;&nbsp;'There are <b>' + basket.count + '</b> ' +<br>
+                                  &nbsp;&nbsp;'items in your basket, ' +<br>
+                                  &nbsp;&nbsp;'<em>' + basket.onSale +<br>
+                                  &nbsp;&nbsp;'</em> are on sale!'<br>
+                                );
+                            </span>
+                            上面这种写法相当繁琐不方便、ES6 引入了模板字符串解决这个问题。<br>
+                            <i>+</i>
+                            <span>
+                                $('#result').append(`<br>
+                                  &nbsp;&nbsp;There are <b>${basket.count}</b> items<br>
+                                  &nbsp;&nbsp;in your basket, <em>${basket.onSale}</em><br>
+                                  &nbsp;&nbsp;are on sale!<br>
+                                `);<br>
+                            </span>
+                            (2) 模板字符串（template string）是增强版的字符串，用反引号（`）标识。它可以当作普通字符串使用，也可以用来定义多行字符串，或者在字符串中嵌入变量。
+                            <i>+</i>
+                            <span>
+                                // 普通字符串<br>
+                                `In JavaScript '\n' is a line-feed.`<br>
+
+                                // 多行字符串<br>
+                                `In JavaScript this is<br>
+                                 not legal.`<br>
+
+                                console.log(`string text line 1<br>
+                                string text line 2`);<br>
+
+                                // 字符串中嵌入变量<br>
+                                let name = "Bob", time = "today";<br>
+                                `Hello ${name}, how are you ${time}?`<br>
+                            </span>
+                            上面代码中的模板字符串，都是用反引号表示。如果在模板字符串中需要使用反引号，则前面要用反斜杠转义。
+                            <i>
+                                +
+                            </i>
+                            <span>
+                                let greeting = `\`Yo\` World!`;
+                            </span>
+                            (3) 如果使用模板字符串表示多行字符串，所有的空格和缩进都会被保留在输出之中。
+                            <i>+</i>
+                            <span>
+                                $('#list').html(`<br>
+                                    &nbsp;&nbsp;< ul><br>
+                                    &nbsp;&nbsp;< li>first< /li><br>
+                                    &nbsp;&nbsp;< li>second< /li><br>
+                                    &nbsp;&nbsp;< /ul><br>
+                                 `);
+                            </span>
+                            上面的代码模板字符串的空格和换行、都是会保留的，如果你不想换行，可以用trim方法消除它
+                            <i>+</i>
+                            <span>
+                                     $('#list').html(`<br>
+                                    &nbsp;&nbsp;< ul><br>
+                                    &nbsp;&nbsp;< li>first< /li><br>
+                                    &nbsp;&nbsp;< li>second< /li><br>
+                                    &nbsp;&nbsp;< /ul><br>
+                                   `).trim());
+                            </span>
+                            (4) 模板字符串中嵌入变量，需要将变量名写在${}之中。 <br>
+                            (5) 大括号内部可以放入任意的JavaScript表达式，可以进行运算，以及引用对象属性<br>
+                            <i>+</i>
+                            <span>
+                            let x = 1;<br>
+                            let y = 2;<br>
+
+                            `${x} + ${y} = ${x + y}`<br>
+                            // "1 + 2 = 3"<br>
+
+                            `${x} + ${y * 2} = ${x + y * 2}`<br>
+                            // "1 + 4 = 5"<br>
+
+                            let obj = {x: 1, y: 2};<br>
+                            `${obj.x + obj.y}`<br>
+                            // "3"<br>
+                            </span>
+                            (6)模板字符串之中还能调用函数
+                            <i>+</i>
+                            <span>
+                                function fn() {<br>
+                                 &nbsp;&nbsp;return "Hello World";<br>
+                                }<br>
+                                `foo ${fn()} bar`<br>
+                                // foo Hello World bar<br>
+                            </span>
+                            (7)如何字符串里的变量没有声明，将报错
+                            <i>+</i>
+                            <span>
+                                   // 变量place没有声明<br>
+                                    let msg = `Hello, ${place}`;<br>
+                                    // 报错<br>
+                            </span>
+                            (8) 由于模板字符串的大括号内部，就是执行 JavaScript 代码，因此如果大括号内部是一个字符串，将会原样输出。
+                            <i>+</i>
+                            <span>
+                                `Hello ${'World'}`
+                                // "Hello World"
+                            </span>
+                            (9)模板字符串甚至还能嵌套。
+                            <i>+</i>
+                            <span>
+                                 const tmpl = addrs => ` <br>
+                                  < table> <br>
+                                  ${addrs.map(addr => ` <br>
+                                    < tr>< td>${addr.first}< /td>< /tr> <br>
+                                    < tr>< td>${addr.last}< /td>< /tr> <br>
+                                  `).join('')} <br>
+                                  < /table> <br>
+                                `
+                                const data = [<br>
+                                    { first: '< Jane>', last: 'Bond' },<br>
+                                    { first: 'Lars', last: '< Croft>' },<br>
+                                ];
+
+                                console.log(tmpl(data));<br>
+                                // < table><br>
+                                //<br>
+                                //   < tr>< td>< Jane>< /td>< /tr><br>
+                                //   < tr>< td>Bond< /td>< /tr><br>
+                                //<br>
+                                //   < tr>< td>Lars< /td>< /tr><br>
+                                //   < tr>< td>< Croft>< /td>< /tr><br>
+                                //<br>
+                                // < /table><br>
+                            </span>
+                            (10)、实例：模板编译
+                            在模板字符串之中，放置了一个常规模板。该模板使用<%...%>放置 JavaScript 代码，使用<%= ... %>输出 JavaScript 表达式。
+                            <i>+</i>
+                            <span>
+                                <img src="../images/es6-01.png" alt="">
+                            </span>
+                            6、标签模板<br>模板字符串的功能，不仅仅是上面这些。它可以紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串。这被称为“标签模板”功能（tagged template）。
+                            <i>+</i>
+                            <span>
+                                   alert`123`<br>
+                                    // 等同于<br>
+                                    alert(123)<br>
+                            </span>
+                            7、String.raw()<br>
+                            String.raw方法，往往用来充当模板字符串的处理函数，返回一个斜杠都被转义（即斜杠前面再加一个斜杠）的字符串，对应于替换变量后的模板字符串。
+                           <i>+</i>
+                            <span>
+                                String.raw({ raw: 'test' }, 0, 1, 2);<br>
+                                // 't0e1s2t'<br>
+                                // 等同于<br>
+                                String.raw({ raw: ['t','e','s','t'] }, 0, 1, 2);<br>
+                            </span>
+                        </li>
+                        <li>
+                            <h6>九、正则的扩展</h6>
+                            1、Number.isFinite(), Number.isNaN()<br>
+                            Number.isFinite()用来检查一个数值是否为有限的（finite）
+                            <i>+</i>
+                            <span>
+                                <img src="../images/es6-02.png" alt="">
+                            </span>
+                            Number.isNaN()用来检查一个值是否为NaN。
+                            <i>+</i>
+                            <span>
+                                <img src="../images/es6-03.png" alt="">
+                            </span>
+                            它们与传统的全局方法isFinite()和isNaN()的区别在于，传统方法先调用Number()将非数值的值转为数值，再进行判断，而这两个新方法只对数值有效，Number.isFinite()对于非数值一律返回false, Number.isNaN()只有对于NaN才返回true，非NaN一律返回false。
+                            <br>2、Number.parseInt(), Number.parseFloat()
+                            <br>ES6 将全局方法parseInt()和parseFloat()，移植到Number对象上面，行为完全保持不变。
+                            <i>+</i>
+                            <span>
+                                <img src="../images/es6-04.png" alt="">
+                            </span>
+                            这样做的目的，是逐步减少全局性方法，使得语言逐步模块化。
+                            <i>+</i>
+                            <span>
+                                Number.parseInt === parseInt // true  <br>
+                                Number.parseFloat === parseFloat // true
+                            </span>
+                            3、Number.isInteger()<br>
+                            Number.isInteger()用来判断一个值是否为整数。需要注意的是，在 JavaScript 内部，整数和浮点数是同样的储存方法，所以 3 和 3.0 被视为同一个值。
+                            <i>+</i>
+                            <span>
+                                Number.isInteger(25) // true<br>
+                                Number.isInteger(25.0) // true<br>
+                                Number.isInteger(25.1) // false<br>
+                                Number.isInteger("15") // false<br>
+                                Number.isInteger(true) // false
+                            </span>
+                            4、Math.trunc()
+                            <br>
+                            Math.trunc方法用于去除一个数的小数部分，返回整数部分。<br>
+                            对于非数值，Math.trunc内部使用Number方法将其先转为数值。<br>
+                            对于空值和无法截取整数的值，返回NaN。<br>
+                            <i>+</i>
+                            <span>
+                                Math.trunc(4.1) // 4<br>
+                                Math.trunc(-4.9) // -4<br>
+                                Math.trunc(-0.1234) // -0<br>
+                                Math.trunc('123.456') // 123<br>
+                                Math.trunc(true) //1<br>
+                                Math.trunc(false) // 0<br>
+                                Math.trunc(null) // 0<br>
+                                Math.trunc(NaN);      // NaN<br>
+                                Math.trunc('foo');    // NaN<br>
+                                Math.trunc();         // NaN<br>
+                            </span>
+                            5、Math.sign()
+                            <br>Math.sign方法用来判断一个数到底是正数、负数、还是零。对于非数值，会先将其转换为数值
+                            <br>它会返回五种值。<br>
+                                参数为正数，返回+1；<br>
+                                参数为负数，返回-1；<br>
+                                参数为 0，返回0；<br>
+                                参数为-0，返回-0;<br>
+                                其他值，返回NaN。<br>
+                               如果参数是非数值，会自动转为数值。对于那些无法转为数值的值，会返回NaN
+                            <i>+</i>
+                            <span>
+                                Math.sign(-5) // -1<br>
+                                Math.sign(5) // +1<br>
+                                Math.sign(0) // +0<br>
+                                Math.sign(-0) // -0<br>
+                                Math.sign(NaN) // NaN<br>
+                                Math.sign('')  // 0<br>
+                                Math.sign(true)  // +1<br>
+                                Math.sign(false)  // 0<br>
+                                Math.sign(null)  // 0<br>
+                                Math.sign('9')  // +1<br>
+                                Math.sign('foo')  // NaN<br>
+                            </span>
+                            6、Math.cbrt()
+                            <br>Math.cbrt方法用于计算一个数的立方根。
+                            <br>对于非数值，Math.cbrt方法内部也是先使用Number方法将其转为数值。
+                            <i>+</i>
+                            <span>
+                                Math.cbrt(-1) // -1<br>
+                                Math.cbrt(0)  // 0<br>
+                                Math.cbrt(1)  // 1<br>
+                                Math.cbrt(2)  // 1.2599210498948734<br>
+                                Math.cbrt('8') // 2<br>
+                                Math.cbrt('hello') // NaN
+                            </span>
+                            7、指数运算符
+                            <br>ES2016 新增了一个指数运算符（**）。
+                            <i>+</i>
+                            <span>
+                                2 ** 2 =  2 * 2 //4<br>
+
+                                2 ** 3  = 2 * 2 *2 //8<br>
+                            </span>
+                            指数运算符可以与等号结合，形成一个新的赋值运算符（**=）。
+                            <i>+</i>
+                            <span>
+                                let a = 1.5;<br>
+                                a **= 2;<br>
+                                // 等同于 a = a * a;<br>
+                                let b = 4;<br>
+                                b **= 3;<br>
+                                // 等同于 b = b * b * b;<br>
+                            </span>
+                        </li>
+                        <li class="active">
+                            <h6>十、函数的扩展</h6>
+                            1、ES6 允许为函数的参数设置默认值，即直接写在参数定义的后面。
+                            <i>+</i>
+                             <span>
+                                 function log(x, y = 'World') {<br>
+                                  &nbsp;&nbsp;console.log(x, y);<br>
+                                }<br>
+                                log('Hello') // Hello World<br>
+                                log('Hello', 'China') // Hello China<br>
+                                log('Hello', '') // Hello<br>
+                                 <br>
+                                 function Point(x = 0, y = 0) {<br>
+                                      &nbsp;&nbsp;this.x = x;<br>
+                                      &nbsp;&nbsp;this.y = y;<br>
+                                    }<br>
+                                    const p = new Point();<br>
+                                    p // { x: 0, y: 0 }<br>
+                             </span>
+                            参数变量是默认声明的，所以不能用let或const再次声明。
+                            <i>+</i>
+                            <span>
+                                function foo(x = 5) {<br>
+                                  &nbsp;&nbsp;let x = 1; // error<br>
+                                  &nbsp;&nbsp;const x = 2; // error<br>
+                                }<br>
+                            </span>
+                            使用参数默认值时，函数不能有同名参数。
+                            <br>
+                            2、与解构赋值默认值结合使用
+                            <i>+</i>
+                            <span>
+                                <img src="../images/es6-05.png" alt="">
                             </span>
                         </li>
                     </ul>
