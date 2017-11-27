@@ -157,7 +157,7 @@ body{
        a{
          color: #0b0080;
        }
-       i{
+       &>i{
          display: block;
          width: 50px;
          height: 20px;
@@ -170,11 +170,14 @@ body{
          font-size: 20px;
        }
        span{
-         color: #4b4b4b;
+         color: #62b1d8;
          padding-left: 50px;
          display: block;
-         background-color: rgb(226, 220, 220);
+         background-color: #2b3a42;
          margin:5px 0;
+         i{
+           color: #77858c;
+         }
        }
        h6{
          font-size: 20px;

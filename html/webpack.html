@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/index.css">
+    <title>webpack</title>
+</head>
+<style>
+    h6{
+        margin-top: 30px;
+    }
+</style>
+<body style=" background: url(../images/back01.png)repeat">
+<div class="header"><h1></h1></div>
+<div class="inner">
+    <div class="msg-box">
+        <div class="msg">
+            <div class="title">2017年11月27日 星期一</div>
+            <h3>webpack</h3>
+            <div class="font">
+                <div class="size">
+                    <h4>技术简介 :</h4>
+                    webpack的核心是一个用于现代JavaScript应用程序的静态模块打包程序。当webpack处理您的应用程序时，它会递归地构建一个依赖关系图，其中包含应用程序需要的每个模块，然后将所有这些模块打包到一个或多个包中。
+                    <p></p>
+                    <img src="../images/webpack.png"  style="width: 100%" alt="">
+                    <h6>一、使用Webpack前的准备</h6>
+                    1、创建一个package.json文件、这是一个标准的npm说明文件，里面蕴含了丰富的信息，包括当前项目的依赖模块，自定义的脚本任务等等。在终端中使用npm init命令可以自动创建这个package.json文件
+                    <span>
+                        npm init
+                    </span>
+                    默认不配置package.json
+                    <span>
+                        npm init -y
+                    </span>
+                    2、package.json文件已经就绪，我们在本项目中安装Webpack作为依赖包<br>
+                    安装webpack
+                    <span>
+                        npm install --save-dev webpack
+                    </span>
+                    3、编写代码
+                    <br>bar.js  (输出js文件)
+                    <span>
+                        export default function bar() {<br>
+                          &nbsp;&nbsp;<i>//</i><br>
+                        }<br>
+                    </span>
+                    <br> app.js  (人口文件  引用bar.js)
+                    <span>
+                        import bar from './bar';<br>
+                        <br>
+                        bar();
+                    </span>
+                    4、使用 webpack 打包
+                    <br>webpack.config.js
+                    <span>
+                        const path = require('path'); <i>//require一个node内置的方法</i><br>
+                        module.exports = {<br>
+                        &nbsp;&nbsp;entry:'./app.js'  <i class="a">//人口文件</i><br>
+                        &nbsp;&nbsp;output:{<br>
+                           &nbsp;&nbsp;&nbsp;&nbsp;path:path.resolve(__dirname,'dist'),  <i>//打包后文件名</i><br>
+                           &nbsp;&nbsp;&nbsp;&nbsp;filename:'min.js'  <i>//打包后的js文件名</i><br>
+                         &nbsp;&nbsp;}<br>
+                        }<br>
+                    </span>
+                    5、配置package.json
+                    <span>
+                         "scripts": {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"dev" :"webpack" <i>//配置命令替代略微繁琐的命令 （不支持注释）</i><br>
+
+                          },
+                    </span>
+                    //默认webpack 会主动匹配webpack.config.js,如果js名称有修改需要配置一下js文件命名
+                    <span>
+                          "scripts": {<br>
+                               &nbsp;&nbsp;&nbsp;&nbsp; "dev":"webpack --config webpack.config.dev.js"<br>
+                           },
+                    </span>
+                    <h6>二、插件plugins</h6>
+                    1、安装html-webpack-plugin
+                    <span>npm i -D html-webpack-plugin</span>
+                    2、webpack.config.js配置文件<br>
+                    默认配置
+                    <span>
+                        const htmlWebpackPlugin = require('html-webpack-plugin');<br>
+                         plugins: [new htmlWebpackPlugin()]
+                    </span>
+                    根据自定义模版配置
+                    <span>
+                          const htmlWebpackPlugin = require('html-webpack-plugin');<br>
+                          plugins: [<br>
+                          &nbsp;&nbsp;new htmlWebpackPlugin({<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;filename:'abc.html', <i>//自定义生成html文件名</i><br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;template:'./src/index.html' <i>//自定义模版路径及文件名</i><br>
+                          &nbsp;&nbsp;})<br>
+                            ]<br>
+                    </span>
+                    <h6>三、devserver</h6>
+                    使用webpack构建本地服务器<br>
+                    想不想让你的浏览器监听你的代码的修改，并自动刷新显示修改后的结果，其实Webpack提供一个可选的本地开发服务器，这个本地服务器基于node.js构建，可以实现你想要的这些功能，不过它是一个单独的组件，在webpack中进行配置之前需要单独安装它作为项目依赖
+                    <br>npm 安装
+                    <span>
+                        npm i -D webpack-dev-server
+                    </span>
+                    package.json
+                    <span>
+                      "scripts": {<br>
+                        &nbsp;&nbsp;"start": "webpack-dev-server --config webpack.config.dev.js"<br>
+                      },
+                    </span>
+                    webpack.config.js
+                    <span>
+                        devServer:{<br>
+                         &nbsp;&nbsp;open:true,  <i>//自动打开页面</i><br>
+                         &nbsp;&nbsp;port:9000, <i>//设置默认监听端口，如果省略，默认为”8080“</i><br>
+                        }
+                    </span>
+                    <h6>四、Babel</h6>
+                    Babel其实是几个模块化的包，其核心功能位于称为babel-core的npm包中，webpack可以把其不同的包整合在一起使用，对于每一个你需要的功能或拓展，你都需要安装单独的包（用得最多的是解析Es6的babel-preset-es2015包和解析JSX的babel-preset-react包）
+                    <br>1、react 配置 npm<br>
+                    安装react依赖包
+                    <span>
+                        npm i -S react react-dom<br>
+                    </span>
+                    babel-loader包 编译react jsX语法
+                    <span>
+                        npm i -D babel-loader babel-core<br>
+                        npm i -D babel-preset-react
+                    </span>
+                    webpack.config.js
+                    <span>
+                          module: {<br>
+                            &nbsp;&nbsp;rules:[<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{test:/\.js$/,<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use:[{<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loader: "babel-loader",<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;options:{presets:['react']}<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}]}<br>
+                           &nbsp;&nbsp;]<br>
+                        }<br>
+                    </span>
+                    2、css npm 配置
+                    <span>npm i -D style-loader css-loader</span>
+                    webpack.config.js配置
+                    <span>
+                        {<br>
+                        &nbsp;&nbsp;test:/\.css$/,<br>
+                        &nbsp;&nbsp;use:['style-loader','css-loader']<br>
+                        }<br>
+                    </span>
+                    引用css
+                    <span>
+                    import './min.css';
+                    </span>
+                    3、引入图片<br>
+                    npm 配置
+                    <span>
+                        npm i -D file-loader
+                    </span>
+                    webpack.config.js
+                    <span>
+                        {<br>
+                        &nbsp;&nbsp;test:/\.(jpg|png|gif|jpeg)$/,<br>
+                        &nbsp;&nbsp;use:['file-loader']<br>
+                        }<br>
+                    </span>
+                    css引用背景图(直接引用)
+                    <span>
+                        body{ background: url(./images/1.jpg);}
+                    </span>
+                    img标签引用
+                    <span>
+                        import dog from './images/2.jpg';<br>
+                        const dog2 = require( './images/5.png');<br>
+                        < img src={dog} alt=""><br>
+                        < img src={dog2} alt=""><br>
+                        <i>//直接引用</i><br>
+                        < img src={require(./images/1.jpg)} alt="">
+                    </span>
+                    3.1url-loader <span>url-loader</span>
+                    npm 配置
+                    <span>npm i -D url-loader</span>
+                    webpack.config.js(小于30KB转化为编码)
+                    <span>
+                           {<br>
+                           &nbsp;&nbsp;test:/\.(jpg|png|gif|jpeg)$/,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;use:[{<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loader: 'url-loader',<br>
+                                   &nbsp;&nbsp;&nbsp;&nbsp; options:{<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit:30000 <i>//小于30KB转化为编码</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;}]<br>
+                            }
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
