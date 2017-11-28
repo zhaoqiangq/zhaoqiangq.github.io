@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="Shortcut Icon" href="../images/icon01.png" />
     <link rel="stylesheet" href="../css/index.css">
     <title>webpack</title>
 </head>
@@ -154,6 +155,57 @@
                     <span>
                     import './min.css';
                     </span>
+                    2.1 css模块化<br>
+                    配置webpack.config.js
+                    <span>
+                       {
+                            &nbsp;&nbsp;test:/\.css$/,<br>
+                            &nbsp;&nbsp;use:['style-loader',{<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;loader: 'css-loader',<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;options:{<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;module:true<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;}]<br>
+                        },
+                    </span>
+                    如何引用模块化css
+                    <span>
+                      import style from './min.css';  <br>
+                      import ost from './ost.css';  <br>
+                      < div class={style.ot}>< /div>
+                      < div class={ost.rt}>< /div>
+                    </span>
+                    2.2 css不需要模块化的文件<br>
+                    配置webpack.config.js
+                    <span>
+                       {
+                            &nbsp;&nbsp;test:/\.css$/,<br>
+                            &nbsp;&nbsp;use:['style-loader',{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;loader: 'css-loader',<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;options:{module:true,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localIdentName:'[name]-[local]_[hash:base64:6]'}}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;],<br>
+                            &nbsp;&nbsp;exclude: [<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;path.resolve(__dirname,'node_module'),  <i>//排除不需要模块化的文件</i><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;path.resolve(__dirname,'src/style')   <i>//排除不需要模块化的文件</i><br>
+                            &nbsp;&nbsp;]<br>
+                        },
+                        {
+                            &nbsp;&nbsp;test:/\.css$/,<br>
+                            &nbsp;&nbsp;use:['style-loader','css-loader'],<br>
+                            &nbsp;&nbsp;include:[<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;path.resolve(__dirname,'node_module'), <i>//排除不需要模块化的文件</i><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;path.resolve(__dirname,'src/style')    <i>//排除不需要模块化的文件</i><br>
+                            &nbsp;&nbsp;]<br>
+                        },
+                    </span>
+                    引用模块兼非模块化
+                    <span>
+                        import otstyle from './ot.css';<br>
+                        import 'font-awesome/css/font-awesome.css'<br>
+                        < span className={otstyle.font}>React< /span><br>
+                        < i className="fa fa-yoast">< /i><br>
+                    </span>
                     3、引入图片<br>
                     npm 配置
                     <span>
@@ -194,10 +246,34 @@
                             &nbsp;&nbsp;}]<br>
                             }
                     </span>
+                    4、引用字体icon
+                    <br>
+                    npm 配置  //安装font-awesome字体
+                    <span>
+                        npm i -S font-awesome
+                    </span>
+                    npm 配置  //安装file-loader依赖（首先查看是否安装）
+                    <span>
+                        npm i -D file-loader
+                    </span>
+                    webpack.config.js
+                    <span>
+                            {<br>
+                            &nbsp;&nbsp;test:/\.(ttf|eot|woff|woff2|svg)$/,<br>
+                            &nbsp;&nbsp;use:['file-loader' ]<br>
+                            }<br>
+                    </span>
+                    引用字体
+                    <span>
+                        import 'font-awesome/css/font-awesome.css'<br>
+                         < i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><br>
+                    </span>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
+
 </body>
 </html>
