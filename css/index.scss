@@ -143,6 +143,18 @@ body{
          margin-top: 15px;
          height: 30px;
          overflow: hidden;
+         i{
+           display: block;
+           width: 50px;
+           height: 20px;
+           text-align: center;
+           line-height: 18px;
+           background: #ccc;
+           color: #fff;
+           cursor: pointer;
+           font-style: normal;
+           font-size: 20px;
+         }
        }
        li.active{
        height:auto;
@@ -156,18 +168,6 @@ body{
        }
        a{
          color: #0b0080;
-       }
-       &>i{
-         display: block;
-         width: 50px;
-         height: 20px;
-         text-align: center;
-         line-height: 18px;
-        background: #ccc;
-         color: #fff;
-         cursor: pointer;
-         font-style: normal;
-         font-size: 20px;
        }
        span{
          color: #62b1d8;
