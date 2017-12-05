@@ -803,6 +803,304 @@
                             <span>
                                 <img src="../images/es6-05.png" alt="">
                             </span>
+                            上面的代码只使用了对象的解构赋值默认值，没有使用函数参数的默认值。
+                            只有当函数foo的参数是一个对象时，变量X和Y才会通过解构赋值生成。
+                            如果foo调用时没提供参数，变量x和y就不会生成，从而报错。<br>
+                            通过提供函数参数的默认值，就可以避免这种情况。
+                            <i>+</i>
+                            <span>
+                                function foo({x,y = 5} = {}){<br>
+                                &nbsp;&nbsp;console.log(x,y);<br>
+                                }<br>
+                                foo() //undegined 5<br>
+                            </span>
+                            3、参数默认值的位置<br>
+                            通常情况下，定义了默认值的参数，应该是函数的尾参数。因为这样比较容易看出来
+                            ，到底省略了那些参数。如果非尾部的参数设置默认值，实际上这个参数是无法省略的
+                            <i>+</i>
+                            <span>
+                                function f(x,y=1){<br>
+                                &nbsp;&nbsp;return [x,y];<br>
+                                }<br>
+                                f();   //[undefined,1]<br>
+                                f(2);  //[2,1]<br>
+                            </span>
+                            如果传入undefined，将触发该参数等于默认值，null则没有这个效果。
+                            <i>+</i>
+                            <span>
+                                function foo(x = 5, y = 6) {<br>
+                                  &nbsp;&nbsp;console.log(x, y);<br>
+                                }<br>
+                                foo(undefined, null)<br>
+                                // 5 null
+                            </span>
+                            4、函数的length属性<br>
+                            指定了默认值以后,函数的length属性，将返回没有指定默认值的参数个数，
+                            也就是说，指定了默认值后，length属性将失真。
+                            <i>
+                                +
+                            </i>
+                            <span>
+                                (function(a){}).length  //1<br>
+                                (function(a = 5){}).length  //0<br>
+                                (function(a,b,c=5){}).length  //2<br>
+                            </span>
+                            如果设置了默认值的参数不是尾参数，那么length属性也不再计入后面的参数了。
+                            <i>+</i>
+                            <span>
+                                (function (a = 0, b, c) {}).length // 0<br>
+                                (function (a, b = 1, c) {}).length // 1
+                            </span>
+                            5、作用域<br>
+                            一旦设置了参数的默认值，函数进行声明初始化时，参数会形成一个单独的作用域。
+                            等初始化结束，这个作用域就会消失。这种语法行为，在不设置参数默认值时，是不会出现的
+                            <i>+</i>
+                            <span>
+                                var x =1;<br>
+                                function f(x,y=x){<br>
+                                &nbsp;&nbsp;console.log(y)<br>
+                                }<br>
+                                f(2)  //2
+                            </span>
+                            上面的代码中，参数y的默认值等于变量x。调用函数f时，参数形成一个单独的作用域。
+                            在这个作用域里面，默认值变量x指向第一个参数x，而不是全局变量x，所以输出是2
+                            <i>+</i>
+                            <span>
+                            let x =1;<br>
+                            function f(y = x){<br>
+                            &nbsp;&nbsp;let x =2;<br>
+                            &nbsp;&nbsp;console.log(y);<br>
+                            }<br>
+                            f();
+                            </span>
+                            上面的代码，函数f调用时，参数y=x形成一个单独的作用域。这个作用域里面，变量x本身没有定义
+                            所以指向外层的全局变量x。函数调用时，函数体内部的局部变量x影响不到默认变量x
+                            <br>6、应用<br>
+                            利用参数默认值，可以指定某一个参数不得省略，如果省略就抛出一个错误
+                            <i>+</i>
+                            <span>
+                                function throwIfMissing(){<br>
+                                &nbsp;&nbsp;throw new Error('Missing parameter');<br>
+                                }<br>
+                                function foo(mustBeProvided = throwIfMissing()){<br>
+                                &nbsp;&nbsp;return mustBeProvided;<br>
+                                }<br>
+                                foo()<br>
+                                //Error:Missing parameter<br>
+                            </span>
+                            7、rest参数
+                            <br>ES6引入rest参数(形成为...变量名)，用于获取函数的多余参数，这样就不需要
+                            使用arguments对象了。rest参数搭配的变量是一个数组，该变量将多余的参数放入数组中。
+                            <i>+</i>
+                            <span>
+                                function add(...values){<br>
+                                &nbsp;&nbsp;let sum = 0;<br>
+                                &nbsp;&nbsp;for(var val of values){<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;sum += val;<br>
+                                &nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;return sum;<br>
+                                }<br>
+                                add(2,5,3)  //10
+                            </span>
+                            下面是一个 rest 参数代替arguments变量的例子。
+                            <br>sort排序功能
+                            <i>+</i>
+                            <span>
+                                // arguments变量的写法<br>
+                                function sortNumbers() {<br>
+                                &nbsp;&nbsp;return Array.prototype.slice.call(arguments).sort();<br>
+                                }<br>
+
+                                // rest参数的写法<br>
+                                const sortNumbers = (...numbers) => numbers.sort();<br>
+                            </span>
+                            push实例
+                            <i>+</i>
+                            <span>
+                                function push(array, ...items) {<br>
+                                  &nbsp;&nbsp;items.forEach(function(item) {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;array.push(item);<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;console.log(item);<br>
+                                  &nbsp;&nbsp;});<br>
+                                }<br>
+
+                                var a = [];<br>
+                                push(a, 1, 2, 3)<br>
+                            </span>
+                            注意，rest 参数之后不能再有其他参数（即只能是最后一个参数），否则会报错。<br>
+                            函数的length属性，不包括 rest 参数。
+                            <br>8、严格模式
+                            ES2016 做了一点修改，规定只要函数参数使用了默认值、解构赋值、或者扩展运算符，那么函数内部就不能显式设定为严格模式，否则会报错。
+                            <i>+</i>
+                            <span>
+                                // 报错
+                                function doSomething(a, b = a) {<br>
+                                 &nbsp;&nbsp; 'use strict';<br>
+                                 &nbsp;&nbsp; // code<br>
+                                }<br>
+
+                                // 报错<br>
+                                const doSomething = function ({a, b}) {<br>
+                                  &nbsp;&nbsp;'use strict';<br>
+                                 &nbsp;&nbsp; // code<br>
+                                };<br>
+
+                                // 报错<br>
+                                const doSomething = (...a) => {<br>
+                                  &nbsp;&nbsp;'use strict';<br>
+                                  &nbsp;&nbsp;// code<br>
+                                };<br>
+
+                                const obj = {<br>
+                                  &nbsp;&nbsp;// 报错<br>
+                                  &nbsp;&nbsp;doSomething({a, b}) {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;'use strict';<br>
+                                   &nbsp;&nbsp; &nbsp;&nbsp;// code<br>
+                                  &nbsp;&nbsp;}<br>
+                                };<br>
+                            </span>
+                            这样规定的原因是，函数内部的严格模式，同时适用于函数体和函数参数。但是，函数执行的时候，先执行函数参数，然后再执行函数体。这样就有一个不合理的地方，只有从函数体之中，才能知道参数是否应该以严格模式执行，但是参数却应该先于函数体执行。
+                            <br>
+                            两种方法可以规避这种限制。第一种是设定全局性的严格模式，这是合法的。
+                            <i>+</i>
+                            <span>
+                                'use strict';<br>
+
+                                function doSomething(a, b = a) {<br>
+                                &nbsp;&nbsp;// code<br>
+                                }<br>
+                            </span>
+                            第二种是把函数包在一个无参数的立即执行函数里面。
+                            <i>+</i>
+                            <span>
+                                const doSomething = (function () {<br>
+                                  &nbsp;&nbsp;'use strict';<br>
+                                  &nbsp;&nbsp;return function(value = 42) {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;return value;<br>
+                                  &nbsp;&nbsp;};<br>
+                                }());
+                            </span>
+                            9、name属性<br>
+                            函数的name属性，返回该函数的函数民
+                            <i>+</i>
+                            <span>
+                                function foo(){}<br>
+                                foo.name //foo
+                            </span>
+                            如果将一个具名函数赋值给一个变量，则ES5和ES6的name属性都返回这个具有函数原来的名字
+                            <i>+</i>
+                            <span>
+                                const bar = function baz(){}<br>
+                                //ES5<br>
+                                bar.name //baz<br>
+                                //ES6<br>
+                                bar.name //baz
+                            </span>
+                            Function构造函数返回的函数实例，name属性的值为anonymous
+                            <i>+</i>
+                            <span>
+                                (new Function).name //anonymous
+                            </span>
+                            bind返回的函数，name属性值会加上bound前缀
+                            <br>10、箭头函数
+                            <br>
+                            ES6允许使用“箭头”(=>)定义函数
+                            <i>+</i>
+                            <span>
+                                var f = v => v;<br>
+                                //等同于下面的函数<br>
+                                var f = function(v){<br>
+                                &nbsp;&nbsp; return v;<br>
+                                }<br>
+                            </span>
+                            如果箭头函数不需要参数或需要多个参数，就使用一个圆括号代表参数部分
+                            <i>+</i>
+                            <span>
+                                var f = () =>5; <br>
+                                //等同于 <br>
+                                var f = function(){return 5}; <br>
+                                <br>
+                                 var sum = (num1,num2) => num1 + num2;<br>
+                                //等同于<br>
+                                var sum = function(num1,num2){<br>
+                                &nbsp;&nbsp;return num1 + num2;<br>
+                                }<br>
+                            </span>
+                            如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来，
+                            并且使用return语句返回。
+                            <i>+</i>
+                            <span>
+                                var sum = (num1,num2) => {return num1 + num2;}
+                            </span>
+                            由于大括号被解释为代码块，所以如果箭头函数直接返回一个对象，必须在对象外面加上括号，否则会报错。
+                            <i>+</i>
+                            <span>
+                                //报错<br>
+                                let getTempItem = id => {id:id,name:"temp"};
+                                <br>
+                                <br>
+                                //不报错<br>
+                                let getTempItem = id => ({id:id,name:"temp"});<br>
+                            </span>
+                            如果箭头行数只有一行语句，且不需要返回值，可以采用下面的写法，就不用写大括号了.
+                            <i>+</i>
+                            <span>
+                                let fn = () => void doesNotReturn();
+                            </span>
+                            箭头函数可以与变量解构结合使用
+                            <i>+</i>
+                            <span>
+                                const full = ({first , last}) => first +' '+last;
+                                <br>
+                                <br>
+                                //等同于<br>
+                                function full(person){<br>
+                                &nbsp; &nbsp;return person.first +' '+person.last;<br>
+                                }
+                            </span>
+                            箭头函数使表达式更加简洁
+                            <i>+</i>
+                            <span>
+                                const isEven = n => n % 2 == 0;<br>
+                                const square = n => n * n;
+                            </span>
+                            箭头函数的一个用处是简化回调函数
+                            <i>+</i>
+                            <span>
+                                [1,2,3].map(function(x)){<br>
+                                    return x * x;<br>
+                                }<br>
+                                //箭头函数写法<br>
+                                [1,2,3].map(x => x * x);
+                            </span>
+                            另一个例子是 (数组排序)
+                            <i>+</i>
+                            <span>
+                                values = [6,34,2,4,34,3,5,23,12];
+                                //正常函数写法<br>
+                                var result = values.sort(function(a,b){<br>
+                                &nbsp;&nbsp;return a - b;<br>
+                                })<br><br>
+
+                                //箭头函数写法<br>
+                                var result = values.sort((a,b) => a - b);<br>
+                            </span>
+                            rest参数与箭头函数结合的例子
+                            <i>+</i>
+                            <span>
+                                const numbers = (...nums) => nums;<br>
+                                numbers(1,2,3,4,5)<br>
+                                //[1,2,3,4,5]<br>
+                                <br>
+                                const headAndTail = (headm,...tail) =>[head,tail];<br>
+                                headAndTail(1,2,3,4,5)<br>
+                                //[1,[2,3,4,5]]<br>
+                            </span>
+                            使用注意点<br>
+                            (1)函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象<br>
+                            (2)不可以当作构造函数，也就是说，不可以使用new命令，否则会抛出一个错误<br>
+                            (3)不可以使用arguments对象，该对象在函数体内不存在。如果使用，可以用rest参数代替。<br>
+                            (4)不可以使用yield命令，因此不能用作Fenerator函数<br>
                         </li>
                     </ul>
                 </div>
