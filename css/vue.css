@@ -1,0 +1,220 @@
+h2 {
+  text-align: center;
+  font-size: 25px;
+  margin: 10px 0;
+  color: rgba(51, 51, 51, 0.7); }
+
+h5 {
+  font-size: 26px;
+  color: #e99645;
+  font-weight: 500;
+  margin-top: 10px; }
+
+p {
+  font-size: 20px;
+  margin-top: 15px;
+  padding-left: 30px;
+  line-height: 40px;
+  text-indent: 35px; }
+
+p.a {
+  text-indent: 0;
+  line-height: 25px;
+  font-size: 16px; }
+
+.jianjie {
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  color: rgba(51, 51, 51, 0.7); }
+  .jianjie ul {
+    width: 100%;
+    height: 200px;
+    margin: 0 auto;
+    margin-top: 30px; }
+    .jianjie ul li {
+      width: 20%;
+      height: 100%;
+      background: red;
+      float: left;
+      padding-top: 25px;
+      box-sizing: border-box;
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.89);
+      text-align: center; }
+      .jianjie ul li p {
+        margin-top: 10px;
+        padding-left: 0;
+        color: rgba(43, 58, 66, 0.57);
+        line-height: 45px;
+        text-indent: 0; }
+    .jianjie ul li:nth-child(1) {
+      background: #d81c30; }
+    .jianjie ul li:nth-child(2) {
+      background: #dc474d; }
+    .jianjie ul li:nth-child(3) {
+      background: #60b2e0; }
+    .jianjie ul li:nth-child(4) {
+      background: #9fcde5; }
+    .jianjie ul li:nth-child(5) {
+      background: #45a46a; }
+
+.hexin {
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box; }
+  .hexin img {
+    width: 500px;
+    margin-left: 25px; }
+
+.dom {
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box; }
+  .dom img {
+    width: 600px;
+    margin-left: 50px; }
+
+.mvvm {
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box; }
+  .mvvm img {
+    width: 600px;
+    margin-left: 50px; }
+
+.tigan {
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box; }
+  .tigan ul {
+    width: 70%;
+    margin-left: 150px; }
+    .tigan ul:after {
+      content: "";
+      clear: both;
+      display: block;
+      line-height: 0;
+      height: 0; }
+    .tigan ul li {
+      width: 50%;
+      float: left;
+      line-height: 40px;
+      font-size: 18px; }
+
+.install {
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box; }
+  .install p {
+    margin-top: 5px;
+    text-indent: 0;
+    line-height: 25px;
+    padding-left: 150px; }
+    .install p i {
+      font-style: normal;
+      color: #b3b3b3;
+      font-size: 16px; }
+    .install p span {
+      font-size: 18px; }
+
+.smx {
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box; }
+
+.zhilin {
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box; }
+  .zhilin p {
+    text-indent: 0;
+    padding-left: 80px; }
+  .zhilin ul {
+    width: 80%;
+    margin-left: 80px;
+    margin-top: 10px; }
+    .zhilin ul:after {
+      content: "";
+      clear: both;
+      display: block;
+      line-height: 0;
+      height: 0; }
+    .zhilin ul li {
+      width: 50%;
+      float: left;
+      line-height: 40px;
+      font-size: 16px; }
+
+.fanfa {
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box; }
+  .fanfa ul {
+    width: 80%;
+    margin-left: 120px;
+    margin-top: 10px; }
+    .fanfa ul:after {
+      content: "";
+      clear: both;
+      display: block;
+      line-height: 0;
+      height: 0; }
+    .fanfa ul li {
+      width: 50%;
+      float: left;
+      line-height: 40px;
+      font-size: 20px;
+      margin-top: 10px; }
+
+.shengming {
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box; }
+  .shengming ul {
+    width: 90%;
+    margin-left: 20px; }
+    .shengming ul:after {
+      content: "";
+      clear: both;
+      display: block;
+      line-height: 0;
+      height: 0; }
+    .shengming ul li {
+      width: 50%;
+      float: left;
+      line-height: 40px;
+      font-size: 18px;
+      margin-top: 10px; }
+      .shengming ul li img {
+        width: 100%; }
+
+.html {
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box; }
+  .html div {
+    font-size: 20px;
+    padding-left: 60px;
+    margin-top: 20px;
+    line-height: 35px; }
+  .html p {
+    text-indent: 0; }
+
+.zujian {
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box; }
+  .zujian p.bb {
+    text-indent: 0; }

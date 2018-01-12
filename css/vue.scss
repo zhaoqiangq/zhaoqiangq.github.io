@@ -1,0 +1,243 @@
+h2{
+  text-align: center;
+  font-size: 25px;
+  margin: 10px 0;
+  color: rgba(51, 51, 51, 0.7);
+}
+h5{
+  font-size: 26px;
+  color: #e99645;
+  font-weight: 500;
+  margin-top: 10px;
+}
+p{
+  font-size: 20px;
+  margin-top: 15px;
+  padding-left: 30px;
+  line-height: 40px;
+  text-indent:35px;
+}
+p.a{
+  text-indent: 0;
+  line-height: 25px;
+  font-size: 16px;
+}
+.jianjie{
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  color: rgba(51, 51, 51, 0.7);
+  ul{
+    width: 100%;
+    height: 200px;
+    margin: 0 auto;
+    margin-top: 30px;
+    li{
+      width: 20%;
+      height: 100%;
+      background: red;
+      float: left;
+      padding-top: 25px;
+      box-sizing: border-box;
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.89);
+      text-align: center;
+      p{
+        margin-top: 10px;
+        padding-left: 0;
+        color: rgba(43, 58, 66, 0.57);
+        line-height: 45px;
+        text-indent:0;
+      }
+    }
+    li:nth-child(1){background: #d81c30;}
+    li:nth-child(2){background: #dc474d;}
+    li:nth-child(3){background: #60b2e0;}
+    li:nth-child(4){background: #9fcde5;}
+    li:nth-child(5){background: #45a46a;}
+  }
+}
+.hexin{
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box;
+  img{
+    width: 500px;
+    margin-left: 25px;
+  }
+}
+.dom{
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box;
+  img{
+    width: 600px;
+    margin-left: 50px;
+  }
+}
+.mvvm{
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box;
+  img{
+    width: 600px;
+    margin-left: 50px;
+  }
+}
+.tigan{
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box;
+  ul{
+    width: 70%;
+    margin-left: 150px;
+    &:after{
+      content: "";
+      clear: both;
+      display: block;
+      line-height: 0;
+      height: 0;
+    }
+    li{
+      width: 50%;
+      float: left;
+      line-height: 40px;
+      font-size: 18px;
+    }
+  }
+}
+.install{
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box;
+  p{
+    margin-top: 5px;
+    text-indent: 0;
+    line-height: 25px;
+    padding-left: 150px;
+    i{
+      font-style: normal;
+      color: #b3b3b3;
+      font-size: 16px;
+    }
+    span{
+      font-size: 18px;
+    }
+  }
+}
+.smx{
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+.zhilin{
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box;
+  p{
+    text-indent: 0;
+    padding-left: 80px;
+  }
+  ul{
+    width: 80%;
+    margin-left: 80px;
+    margin-top: 10px;
+    &:after{
+      content: "";
+      clear: both;
+      display: block;
+      line-height: 0;
+      height: 0;
+    }
+    li{
+      width: 50%;
+      float: left;
+      line-height: 40px;
+      font-size: 16px;
+    }
+  }
+}
+.fanfa{
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box;
+  ul {
+    width: 80%;
+    margin-left: 120px;
+    margin-top: 10px;
+    &:after {
+      content: "";
+      clear: both;
+      display: block;
+      line-height: 0;
+      height: 0;
+    }
+    li {
+      width: 50%;
+      float: left;
+      line-height: 40px;
+      font-size: 20px;
+      margin-top: 10px;
+    }
+  }
+}
+.shengming{
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box;
+  ul{
+    width: 90%;
+    margin-left: 20px;
+    &:after {
+      content: "";
+      clear: both;
+      display: block;
+      line-height: 0;
+      height: 0;
+    }
+    li{
+      width: 50%;
+      float: left;
+      line-height: 40px;
+      font-size: 18px;
+      margin-top: 10px;
+      img{
+        width: 100%;
+      }
+    }
+  }
+}
+.html{
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box;
+  div{
+    font-size: 20px;
+    padding-left: 60px;
+    margin-top: 20px;
+    line-height: 35px;
+  }
+
+  p{
+    text-indent: 0;
+  }
+}
+.zujian{
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box;
+  p.bb{
+    text-indent: 0;
+  }
+}

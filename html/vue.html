@@ -6,36 +6,425 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="Shortcut Icon" href="../images/icon01.png" />
+    <link rel="stylesheet" href="../css/vue.css">
+    <link rel="Shortcut Icon" href="../images/icon01.png"/>
     <title>Vue</title>
 </head>
-<style>
-    h5{
-        margin-top: 5px;
-    }
-</style>
-<body style=" background: url(../images/back01.png)repeat">
+
+<body style="background: url(../images/back01.png)repeat">
 <div class="header"><h1></h1></div>
 <div class="inner">
     <div class="msg-box">
         <div class="msg">
-            <div class="title">2017年12月11日 星期一</div>
-            <h3>Vue</h3>
+            <div class="title">2018年1月9日 星期二</div>
             <div class="font">
-                <div class="size">
-                    <h4>技术简介 :</h4>
-                    <p>Vue.js (读音 /vjuː/，类似于 view) 是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。Vue 的核心库只关注视图层，它不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与单文件组件和 Vue 生态系统支持的库结合使用时，Vue 也完全能够为复杂的单页应用程序提供驱动。</p>
+
+                <div class="jianjie">
+                    <h2>简介Vue.js</h2>
+                    <h5>vue是什么</h5>
+                    <p>构建用户界面的渐进式框架</p>
+                    <p>只关注视图层(view)</p>
+                    <ul>
+                        <li>声明式渲染 <p>Declarative<br>Rendering</p></li>
+                        <li>组件系统 <p>Component<br>System</p></li>
+                        <li>客户端路由 <p>vue-Router<br>Client-Side<br>Routing</p></li>
+                        <li>状态管理 <p>VueX<br>Large Scale<br>State</p></li>
+                        <li>构建工具 <p>Build<br>webpack</p></li>
+                    </ul>
+                </div>
+
+                <div class="hexin">
+                    <h2>Vue中的两个核心点</h2>
+                    <h5>响应的数据绑定</h5>
+                    <p>当数据发生变化 -> 自动更新视图</p>
+                    <p>利用Object.definedProperty中的setter/getter代理数据，监听对数据的操作</p>
+                    <h5>组合的视图组件</h5>
+                    <p>ui页面映射为组件树</p>
+                    <p>划分组件可维护、可重用、可测试</p>
+                    <img src="../images/vue01.png" alt="">
+                </div>
+
+                <div class="dom">
+                    <h2>虚拟DOM</h2>
+                    <h5>虚拟DOM(virtual DOM)</h5>
+                    <p>运行js的速度很快的，大量的操作DOM就会很慢。时常在更新数据后会重新渲染页面，这样
+                    会造成在没有改变数据的地方也会重新渲染DOM节点，这样就造成了很大程度上的资源浪费。</p>
+                    <p>利用在内存中生成与真实DOM与之对应的数据结构，这个在内存中生成的结构称之为虚拟DOM </p>
+                    <p>  当数据发生变化时，能够智能地计算出重新渲染组件的最小代价并应用到DOM操作上。</p>
+                    <h5>虚拟DOM转化图</h5>
+                    <img src="../images/vue02.jpg" alt="">
+                    <h5>虚拟DOM代码示意图</h5>
+                    <img src="../images/vue03.jpg" alt="" style="width: 90%">
+                    <h5>DOM对比图</h5>
+                    <img src="../images/vue04.jpg" alt="" style="width: 90%">
+                </div>
+
+                <div class="mvvm">
+                    <h2>MVVM模式</h2>
+                    <h5>MVVM模式</h5>
+                    <img src="../images/vue05.jpg" style="width: 90%" alt="">
+                </div>
+
+                <div class="smx">
+                    <h2>声明式渲染</h2>
+                    <h5>声明式</h5>
+                    <p>只需要声明在哪里(where),做什么(what),则无需关心如何实现(how)</p>
+                    <h5>命令式</h5>
+                    <p>需要以具体的代码表达式在哪里(where),做什么(what),如何实现(how)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;例子：求数组中每一项的倍数<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;命令式<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用for循环拿出每一项,然后求知完成后，在载入到另一个数组中<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;声明式<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用map方法，关注如何求值
+                    </p>
+                    <h5>vue声明式渲染</h5>
+                    <p>初始化根实例，vue主动将数据绑定到DOM模板上</p>
+                </div>
+
+                <div class="tigan">
+                    <h2>渐进式提纲</h2>
+                    <h5>基础语法</h5>
+                    <ul>
+                        <li>vue实例</li>
+                        <li>模板语法</li>
+                        <li>计算属性</li>
+                        <li>class和style绑定</li>
+                        <li>条件和列表渲染</li>
+                        <li>事件处理器</li>
+                        <li>表单控件绑定</li>
+                        <li>组件</li>
+                    </ul>
+                    <h5>高级进阶</h5>
+                    <ul>
+                        <li>vue插件编写</li>
+                        <li>mixin混合</li>
+                        <li>过渡效果</li>
+                        <li>自定义指令</li>
+                        <li>vue-router:路由系统的使用</li>
+                        <li>vueX:状态管理器</li>
+                    </ul>
+                    <h5>构建工具</h5>
+                    <ul>
+                        <li>nodejs:javascript运行环境</li>
+                        <li>webpack:模块管理和打包工具</li>
+                        <li>vue-cli:脚手架配置</li>
+                    </ul>
+                </div>
+
+                <div class="install">
+                    <h2>开启vue</h2>
+                    <h5>安装vue </h5>
+
                     <p>
-                    <h6>兼容性</h6>
-                        Vue.js 不支持 IE8 及其以下版本，因为 Vue.js 使用了 IE8 不能模拟的 ECMAScript 5 特性。Vue.js 支持所有兼容 ECMAScript 5 的浏览器。
+                        <i>全局安装 vue-cli</i><br>
+                        <span>npm install --global vue-cli</span>
                     </p>
                     <p>
-                     <h6>直接 < script> 引入</h6>
-                    <h5>CDN</h5>
-                    推荐：https://cdn.jsdelivr.net/npm/vue，会保持和 npm 发布的最新的版本一致。可以在 https://cdn.jsdelivr.net/npm/vue/ 浏览 npm 包资源。<br>
-                    也可以从 unpkg 和 cdnjs 获取 (cdnjs 的版本更新可能略滞后)。
+                        <i>创建一个基于 webpack 模板的新项目</i><br>
+                        <span>vue init webpack my-project</span>
+                    </p>
+                    <p>
+                        <i>安装依赖，走你</i><br>
+                        <span>cd my-project</span><br>
+                        <span>npm install</span><br>
+                        <span>npm run dev</span>
                     </p>
                 </div>
+
+                <div class="zhilin">
+                    <h2>指令</h2>
+                    <h5>什么是指令</h5>
+                    <p>是一种特殊的自定义行间属性<br>
+                        指令的职责就是当其表达式的值改变时相应地将某些行为应用到DOM上<br>
+                        在Vue中，指令以V开头
+                    </p>
+                    <h5>内置的指令</h5>
+                    <ul>
+                        <li>
+                            v-bind 动态的绑定数据  简写为:
+                        </li>
+                        <li>
+                            v-on 绑定事件监听器。简写为@
+                        </li>
+                        <li>
+                            v-text 更新数据，会覆盖已有结构
+                        </li>
+                        <li>
+                            v-html 可以解析数据中的html结构
+                        </li>
+                        <li>
+                            v-show  根据值的真假，切换元的display属性
+                        </li>
+                        <li>
+                            v-if  根据值的真假，切换的元素会被销毁，重建
+                        </li>
+                        <li>
+                            v-else-if 多条件判断，为真则渲染
+                        </li>
+                        <li>
+                            v-else 条件都不符合渲染
+                        </li>
+                        <li>
+                            v-model 在表单控件元素上创建双向数据绑定
+                        </li>
+                        <li>
+                            v-pre 跳过元素和子元素的编译过程
+                        </li>
+                        <li>
+                            v-once 只渲染一次，随后数据的更新不会重新渲染
+                        </li>
+                        <li style="width: 100%">
+                            v-cloak 隐藏未编译的Mustache语法。css中设置[v-cloak]{display:none}
+                        </li>
+                        <li style="width: 100%">
+                            v-for 基于源数据多次渲染元素或模板块
+                            v-for="val,index in object"   （val ===每一个   index=== 下标)<br>
+                            :key="item.id" 默认不改变整体，而是替换元素。迫使其重新排序的元素，你需要提供一个 key 的特殊属性<br>
+                        </li>
+                    </ul>
+                    <h5>自定义指令</h5>
+                    <p>除了核心功能默认内置的指令 (v-model 和 v-show)，Vue 也允许注册自定义指令</p>
+                    <p class="a">
+                        directives: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;focus: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 指令的定义<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inserted: function (el) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;el.focus()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }
+                    </p>
+                </div>
+
+                <div class="fanfa">
+                    <h2>选项 / 数据</h2>
+                    <h5>选项DOM</h5>
+                    <ul>
+                        <li>
+                            data 数据对象<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;data:data<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;data(){<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}
+                        </li>
+                        <li>
+                            computed 计算属性<br>
+                            computed: {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp; aDouble: function () {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this.a * 2<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                            }
+                        </li>
+                        <li>
+                            methods 事件处理器<br>
+                            methods: {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;plus: function () {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.a++<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            }
+                        </li>
+                        <li>
+                            watch 监听器<br>
+                            watch: {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;a: function (val, oldVal) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(val, oldVal)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            }
+                        </li>
+                        <li></li>
+                        <li>
+                            watch:{  深度监听<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;list:{<br>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler:function () {},<br>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deep:true<br>
+                                 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            },<br>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="shengming">
+                    <h2>生命周期钩子</h2>
+                    <h5>生命周期</h5>
+                    <ul>
+                        <li>
+                            创建前状态<br>
+                            beforeCreate: function () {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;可以在这加个loading事件<br>
+                            },<br>
+                            创建完毕状态<br>
+                            created: function () {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;初始化，实现函数自执行<br>
+                            },<br>
+                            挂载前状态<br>
+                            beforeMount: function () {<br>
+                            },<br>
+                            挂载结束状态<br>
+                            mounted: function () {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;发起后端请求，拿回数据，配合路由做一些事情<br>
+                            },<br>
+                            更新前状态<br>
+                            beforeUpdate: function () {<br>
+                            },<br>
+                            更新完成状态<br>
+                            updated: function () {<br>
+                            },<br>
+                            销毁前状态<br>
+                            beforeDestroy: function () {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;你确认删除吗？当前组件已被删除，清空相关内容<br>
+                            },<br>
+                            销毁完成状态<br>
+                            destroyed: function () {<br>
+                            }
+                        </li>
+                        <li>
+                            <img src="../images/vue06.png" alt="">
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="html">
+                    <h2>html模板</h2>
+                    <h5>html模板</h5>
+                    <p>基于DOM的模板，模板都是可解析的有效的的HTML</p>
+                    <h5>插值</h5>
+                    <div>文本：使用Mustache语法（双大括号）{{vlaue}}
+                        <br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;作用：替换实例上的属性值，当值改变时，插值内容处主动更新<br>
+                        元素的html：双大括号输出的是文本，不会解析HTML<br>
+                        <p class="a">
+                             例如：v-html="html.html"<br>
+                            let obj :{<br>
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;html:"< div>hello wrok< /div>"<br>
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;id:1<br>
+                            }<br>
+                            data:{<br>
+                                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;html: obj<br>
+                            }<br>
+                        </p>
+
+                        属性：使用v-bind进行绑定，可以响应变化
+                        <p class="a">
+                            v-bind:id="html.id"
+                        </p>
+                        <br>
+                        使用JavaScript表达式：写简单的表达式
+                        <p class="a">
+                            {{ 1 + 2 }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{{true ? 'yes' : none}}
+                        </p>
+                    </div>
+                    <h2>字符串模板</h2>
+                    <h5>template字符串</h5>
+                    <div>
+                        template选项对象的属性<br>
+                        模板将会替换挂载的元素，挂载元素的内容都将被忽略<br>
+                        根节点只能有一个<br>
+                        将html结构写在一对script标签中，设置type = "x-template"
+                        <p class="a">
+                            < script type="x-template" id="temp"><br>
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; < div>< span>this is template< /span>< /div><br>
+                            < /script><br>
+                            var vm = new Vue({<br>
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;template: "#temp"<br>
+                            })<br>
+                        </p>
+                    </div>
+                    <h2>模板-render函数</h2>
+                    <h5>render函数</h5>
+                    <div>
+                        render 选项对象的属性<br>
+                        createElement(标签名,[数据对象],子元素)
+                        <p class="a">
+                            render(createElement){<br>
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return createElement(<br>
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"ul",<br>
+                                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{<br>
+                                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;class:{ yellow:true },<br>
+                                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;attrs:{ abc:123,id:1},<br>
+                                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;style:{ fontSize:"50px"},<br>
+                                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;domProps:{ innerHTML:"< li>我是html< /li>" }<br>
+                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },<br>
+                               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[<br>
+                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;createElement("li",{<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;class:{ red:true },<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;domProps:{ innerHTML:"1" }<br>
+                                         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}),<br>
+                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;createElement("li",2),<br>
+                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;createElement("li",3)<br>
+                                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;]<br>
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;)<br>
+                            }
+                        </p>
+                    </div>
+                    <h5>数据对象属性</h5>
+                    <div>
+                    class:{},    //绑定class 和v-bind:class 一样的API<br>
+                    style:{}     //班的样式，和v-bind:style一样的API<br>
+                    attrs:{}     //添加行间属性<br>
+                    domProps:{}, //DOM元素属性<br>
+                    on:{}        //绑定事件<br>
+                    </div>
+
+                </div>
+
+                <div class="zujian">
+                    <h2>组件化开发</h2>
+                    <h5>什么是组件</h5>
+                    <p>
+                        页面就是一个个部分组成的，比如导航，列表，弹窗，下拉菜单，页面只是这些组件的容器，
+                        组件自由组合形成功能完整的界面，当不需要某个组件，或者想要替换某个组件时,可以随时可以
+                        进行替换和删除，而不影响整个应用的运行。
+                    </p>
+                    <h5>组件的好处</h5>
+                    <p class="bb">
+                        提高开发效率<br>
+                        方便重复使用<br>
+                        简化调试步骤<br>
+                        提升整个项目的可维护性<br>
+                        便于协同开发
+                    </p>
+                    <h5>全局注册</h5>
+                       <p>要注册一个全局组件，可以使用 Vue.component(tagName, options)</p>
+                    <p class="a">
+                        Vue.component('my-component', {
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp; props:['list'],
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;template:`< ul class="list">
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;< li v-for="item of list" @click="selectValueHandle(item)">{{item}}< /li>
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;< /ul> `,
+                        <br>})
+                    </p>
+                    <h5>局部注册</h5>
+                    <p>
+                        你不必把每个组件都注册到全局。你可以通过某个 Vue 实例/组件的实例选项 components 注册仅在其作用域中可用的组件：
+                    </p>
+                    <p class="a">
+                        var Child = {
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template: '< div>A custom component!< /div>'
+                        <br>}
+                        <br>new Vue({
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;components: {
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// < my-component> 将只在父组件模板中可用
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'my-component': Child
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                        <br>})
+                    </p>
+                    <h5>is特性</h5>
+                    <p>
+                        当使用 DOM 作为模板时 ，你会受到 HTML 本身的一些限制，因为 Vue 只有在浏览器解析、规范化模板之后才能获取其内容。尤其要注意，像 <span><</span>ul>、<span><</span>ol>、<span><</span>table>、<span><</span>select> 这样的元素里允许包含的元素有限制，而另一些像 <span><</span>option> 这样的元素只能出现在某些特定元素的内部。
+                    </p>
+                    <p class="a">
+                        在自定义组件中使用这些受限制的元素时会导致一些问题，例如：
+                        <br><span><</span>table>
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>my-row>...<span><</span>/my-row>
+                        <br><span><</span>/table>
+                        <br>自定义组件 <span><</span>my-row> 会被当作无效的内容，因此会导致错误的渲染结果。变通的方案是使用特殊的 is 特性：
+                    </p>
+
+
+                </div>
+
+
             </div>
         </div>
     </div>
