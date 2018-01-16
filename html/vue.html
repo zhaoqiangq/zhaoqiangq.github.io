@@ -111,26 +111,6 @@
                     </ul>
                 </div>
 
-                <div class="install">
-                    <h2>开启vue</h2>
-                    <h5>安装vue </h5>
-
-                    <p>
-                        <i>全局安装 vue-cli</i><br>
-                        <span>npm install --global vue-cli</span>
-                    </p>
-                    <p>
-                        <i>创建一个基于 webpack 模板的新项目</i><br>
-                        <span>vue init webpack my-project</span>
-                    </p>
-                    <p>
-                        <i>安装依赖，走你</i><br>
-                        <span>cd my-project</span><br>
-                        <span>npm install</span><br>
-                        <span>npm run dev</span>
-                    </p>
-                </div>
-
                 <div class="zhilin">
                     <h2>指令</h2>
                     <h5>什么是指令</h5>
@@ -384,6 +364,17 @@
                         提升整个项目的可维护性<br>
                         便于协同开发
                     </p>
+                    <h5>vue中的组件</h5>
+                    <p>
+                        vue中的组件是一个自定义标签，Vue.js的编译器为它添加特殊功能
+                        vue也可以扩展原生的html元素，封装可重用的代码。
+                    </p>
+                    <p class="bb">
+                        组件的基本构成<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;样式结构<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;行为逻辑<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据<br>
+                    </p>
                     <h5>全局注册</h5>
                        <p>要注册一个全局组件，可以使用 Vue.component(tagName, options)</p>
                     <p class="a">
@@ -419,11 +410,396 @@
                         <br>&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>my-row>...<span><</span>/my-row>
                         <br><span><</span>/table>
                         <br>自定义组件 <span><</span>my-row> 会被当作无效的内容，因此会导致错误的渲染结果。变通的方案是使用特殊的 is 特性：
+                        <br><span><</span>table>
+                        <br><span><</span>tr is="my-row"><span><</span>/tr>
+                        <br><span><</span>/table>
                     </p>
+                    <h5>data必须是函数</h5>
+                    <p>构造 Vue 实例时传入的各种选项大多数都可以在组件里使用。只有一个例外：data 必须是函数。</p>
+                    <p class="a">
+                        data(){ <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.......<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }<br>
+                    </p>
+                    <h5>组件组合</h5>
+                    <p>组件设计初衷就是要配合使用的，最常见的就是形成父子组件的关系：组件 A 在它的模板中使用了组件 B。它们之间必然需要相互通信：父组件可能要给子组件下发数据，子组件则可能要将它内部发生的事情告知父组件。</p>
+                    <p>在 Vue 中，父子组件的关系可以总结为 prop 向下传递，事件向上传递。父组件通过 prop 给子组件下发数据，子组件通过事件给父组件发送消息。</p>
+                    <img src="../images/vue07.png" alt="">
+                    <h5>使用 Prop 传递数据</h5>
+                    <p>组件实例的作用域是孤立的。这意味着不能 (也不应该) 在子组件的模板内直接引用父组件的数据。父组件的数据需要通过 prop 才能下发到子组件中。</p>
+                    <p class="a">
+                        props: ['message']
+                    </p>
+                    <h5>单向数据流</h5>
+                    <p>Prop 是单向绑定的：当父组件的属性变化时，将传导给子组件，但是反过来不会。这是为了防止子组件无意间修改了父组件的状态，来避免应用的数据流变得难以理解。</p>
+                    <p class="bb">
+                        在两种情况下，我们很容易忍不住想去修改 prop 中数据：<br>
+                        1、Prop 作为初始值传入后，子组件想把它当作局部数据来用；
+                    </p>
+                    <p class="a">
+                        定义一个局部变量，并用 prop 的值初始化它：<br>
+                        props: ['initialCounter'],<br>
+                        data(){<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return { <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;counter: this.initialCounter <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }<br>
+                    </p>
+                    <p class="bb">
+                        2、Prop 作为原始数据传入，由子组件处理成其它数据输出。
+                    </p>
+                    <p class="a">
+                        定义一个计算属性，处理 prop 的值并返回<br>
+                        props: ['size'],<br>
+                        computed: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;normalizedSize: function () {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this.size.trim().toLowerCase()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }
+                    </p>
+                    <h5>Prop 验证</h5>
+                    <p>我们可以为组件的 prop 指定验证规则。如果传入的数据不符合要求，Vue 会发出警告。这对于开发给他人使用的组件非常有用。</p>
+                    <p class="a">
+                        要指定验证规则，需要用对象的形式来定义 prop，而不能用字符串数组：
+                        <br>props: {
+                        <br><i>// 基础类型检测 (`null` 指允许任何类型)</i>
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;propA: Number,
+                        <br><i>// 可能是多种类型</i>
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;propB: [String, Number],
+                        <br><i>// 必传且是字符串</i>
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;propC: {
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: String,
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;required: true
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;},
+                        <br><i>// 数值且有默认值</i>
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;propD: {
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: Number,
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default: 100
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;},
+                        <br><i>// 数组/对象的默认值应当由一个工厂函数返回</i>
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;propE: {
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: Object,
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default: function () {
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return { message: 'hello' }
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;},
+                        <br><i>// 自定义验证函数</i>
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;propF: {
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;validator: function (value) {
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return value > 10
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;}
+                        <br>}
+                    </p>
+                    <h5>$emit自定义事件</h5>
+                    <p class="bb">
+                        使用 $on(eventName) 监听事件<br>
+                        使用 $emit(eventName) 触发事件
+                    </p>
+                    <p class="a">
+                        下面一个示例<br>
+                        <span><</span>div><span>
+                         <br>&nbsp;&nbsp;&nbsp;<span><</span>button-counter v-on:increment="incrementTotal"><span><</span>/button-counter>
+                         <br> <</span>/div>
 
+                        <br>Vue.component('button-counter', {
+                        <br>&nbsp;&nbsp;&nbsp;template: '<span><</span>button v-on:click="incrementCounter">{{ counter }}<span><</span>/button>',
+                        <br>&nbsp;&nbsp;&nbsp;},
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;methods: {
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;incrementCounter: function () {
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.$emit('increment')
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                        <br>&nbsp;&nbsp;&nbsp;},
+                        <br>})
+                        <br>
+                        <br>new Vue({
+                        <br>&nbsp;&nbsp;&nbsp;methods: {
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;incrementTotal: function () {
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.total += 1
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                        <br>&nbsp;&nbsp;&nbsp;}
+                        <br>})
+                    </p>
+                    <h2>使用slot分发内容</h2>
+                    <p>使用一种方式混合父组件的内容与子组件自己的模板，这个过程称为内容分发。在子组件中使用特殊的
+                        <span><</span>slot>元素作为内容的插槽。这样会使组件的可扩展性更强</p>
+                    <h5> <span><</span>slot>单个插槽</h5>
+                    <p>在自组件模板中有solt标签，被视为备用内容，在父组件不提供内容的情况下使用。如果父组件提供内容，则把整个内容
+                    片段插入到slot所在的DOM位置，并替换slot标签本身。子组件模板中没有slot标签，父组件提供的内容会被抛弃</p>
+                    <h5>具名插槽</h5>
+                    <p>
+                        <span><</span>slot> 元素可以用一个特殊的属性name来配置如何分发内容。可以使用一个匿名的slot，处理那些没有对应slot的内容
+                    </p>
+                    <p class="a">
+                        示例如下：
+                        <br>Vue.component('list',{
+                        <br>     template: `
+                        <br> &nbsp;&nbsp; &nbsp;<span><</span>div>
+                        <br> &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span><</span>ul>
+                        <br> &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span><</span>slot name="one"><span><</span>li>1<span><</span>/li><span><</span>/slot>
+                        <br> &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span><</span>slot name="two"><span><</span>li>2<span><</span>/li><span><</span>/slot>
+                        <br> &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span><</span>slot name="thrss"><span><</span>li>3<span><</span>/li><span><</span>/slot>
+                        <br> &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span><</span>slot><span><</span>li>4<span><</span>/li><span><</span>/slot>
+                        <br> &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; <span><</span>/ul>
+                        <br>&nbsp;&nbsp; &nbsp;<span><</span>/div>`
+                        <br>})
+                        <br>
+                        <br><span><</span>list>
+                        <br>&nbsp;&nbsp; &nbsp;    <span><</span>div slot="one"> Hello vue1<span><</span>/div>
+                        <br>&nbsp;&nbsp; &nbsp;    <span><</span>template slot="two">
+                        <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span><</span>div> Hello vue2<span><</span>/div>
+                        <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span><</span>div> Hello vue2<span><</span>/div>
+                        <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span><</span>div> Hello vue2<span><</span>/div>
+                        <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span><</span>div> Hello vue2<span><</span>/div>
+                        <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span><</span>div> Hello vue2<span><</span>/div>
+                        <br>&nbsp;&nbsp; &nbsp;    <span><</span>/template>
+                        <br>&nbsp;&nbsp; &nbsp;    <span><</span>div slot="thrss"> Hello vue3<span><</span>/div>
+                        <br>&nbsp;&nbsp; &nbsp;    <span><</span>div>Hello vue4<span><</span>/div>
+                        <br><span><</span>/list>
+                    </p>
+                    <h5>作用域插槽</h5>
+                    <p>作用域插槽是一种特殊类型的插槽，用作一个 (能被传递数据的) 可重用模板，来代替已经渲染好的元素。</p>
+                    <p class="a">
+                        Vue.component('child',{
+                        <br>template: `
+                        <br>&nbsp;&nbsp;&nbsp;<span><</span>div class="child">
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>slot text="hello from child"><span><</span>/slot>
+                        <br>&nbsp;&nbsp;&nbsp;<span><</span>/div>`
+                        <br>})
+                    </p>
+                    <p>在父级中，具有特殊特性 slot-scope 的 <span><</span>template> 元素必须存在，表示它是作用域插槽的模板。slot-scope 的值将被用作一个临时变量名，此变量接收从子组件传递过来的 prop 对象：</p>
+                    <p class="a">
+                        <span><</span>div class="parent">
+                        <br>&nbsp;&nbsp;&nbsp;<span><</span>child>
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>template slot-scope="props">
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>span>hello from parent<span><</span>/span>
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>span>{{ props.text }}<span><</span>/span>
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>/template>
+                        <br>&nbsp;&nbsp;&nbsp;<span><</span>/child>
+                        <br><span><</span>/div>
+                    </p>
+                    <p>如果我们渲染上述模板，得到的输出会是：</p>
+                    <p class="a">
+                        <span><</span>div class="parent">
+                        <br>&nbsp;&nbsp;&nbsp;<span><</span>div class="child">
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>span>hello from parent<span><</span>/span>
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>span>hello from child<span><</span>/span>
+                        <br>&nbsp;&nbsp;&nbsp;<span><</span>/div>
+                        <br><span><</span>/div>
+                    </p>
+                    <h5>动态组件</h5>
+                    <p>通过使用保留的 <span><</span>component> 元素，并对其 is 特性进行动态绑定，你可以在同一个挂载点动态切换多个组件：</p>
+                    <p class="a">
+                         var Home = {
+                        <br>&nbsp;&nbsp;&nbsp;template: '<span><</span>p>Welcome home!<span><</span>/p>'
+                        <br>}
 
+                        <br> var vm = new Vue({
+                        <br>  &nbsp;&nbsp;&nbsp;el: '#example',
+                        <br>  &nbsp;&nbsp;&nbsp;data: {
+                        <br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     currentView: Home
+                        <br>  &nbsp;&nbsp;&nbsp;}
+                        <br>})
+                        <br><span><</span>component v-bind:is="currentView">
+                        <br><i>组件在 vm.currentview 变化时改变！</i>
+                        <br><span><</span>/component>
+                    </p>
+                    <h5>keep-alive</h5>
+                    <p>如果把切换出去的组件保留在内存中，可以保留它的状态或避免重新渲染。为此可以添加一个 keep-alive 指令参数：</p>
+                    <p class="a">
+                        <span><</span>keep-alive>
+                        <br>    &nbsp;&nbsp;&nbsp;<span><</span>component :is="currentView">
+                        <br>&nbsp;&nbsp;&nbsp;<i>非活动组件将被缓存！ </i>
+                        <br>    &nbsp;&nbsp;&nbsp;<span><</span>/component>
+                        <br><span><</span>/keep-alive>
+                    </p>
+                    <h5>子组件引用</h5>
+                    <p>尽管有 prop 和事件，但是有时仍然需要在 JavaScript 中直接访问子组件。为此可以使用 ref 为子组件指定一个引用 ID。</p>
+                    <p class="a">
+                        <span><</span>user-profile ref="profile"><span><</span>/user-profile>
+                        <br><i>// 访问子组件实例</i>
+                        <br>var child = parent.$refs.profile
+                    </p>
                 </div>
 
+                <div class="install">
+                    <h2>开启vue</h2>
+                    <h5>安装vue </h5>
+                    <p>
+                        <i>全局安装 vue-cli</i><br>
+                        <span>npm install --global vue-cli</span>
+                    </p>
+                    <p>
+                        <i>创建一个基于 webpack 模板的新项目</i><br>
+                        <span>vue init webpack my-project</span>
+                    </p>
+                    <p>
+                        <i>安装依赖，走你</i><br>
+                        <span>cd my-project</span><br>
+                        <span>npm install</span><br>
+                        <span>npm run dev</span>
+                    </p>
+                    <h5>安装sass</h5>
+                    <p>npm install node-sass --save-dev<br>
+                        npm install sass-loader --save-dev</p>
+                    <p>vue-cli生成的项目，已经默认加入了处理sass的loader</p>
+                    <p class="a">
+                        <span><</span>style lang="scss" scope><br>
+
+                        <span><</span>/style>
+                    </p>
+                    <h5>vue-cli目录结构及说明</h5>
+                    <div id="article_content" class="article_content " data-mod="popu_519" data-dsm="post" style="overflow: hidden;margin-left: 50px;">
+
+                        <strong><span style="font-size:18px;color:#FF0000;">一、</span></strong><br><br>
+                        ├── build&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 项目构建(webpack)相关代码&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 记忆：（够贱）&nbsp;&nbsp;&nbsp; 9个<br><br>
+                        │ ├── build.js&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // 生产环境构建代码<br><br>
+                        │ ├── check-versions.js // 检查node&amp;npm等版本<br><br>
+                        │ ├── dev-client.js&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // 热加载相关<br><br>
+                        │ ├── dev-server.js&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; // 构建本地服务器<br><br>
+                        │ ├── utils.js&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 构建配置公用工具<br><br>
+                        │ ├── vue-loader.conf.js // vue加载器<br><br>
+                        │ ├── webpack.base.conf.js // webpack基础环境配置<br><br>
+                        │ ├── webpack.dev.conf.js //&nbsp; webpack开发环境配置<br><br>
+                        │ └── webpack.prod.conf.js // webpack生产环境配置<br><br><br><span style="color:#FF0000;"><br><strong><span style="font-size:18px;">二、</span></strong></span><br>
+                        ├── config// 项目开发环境配置相关代码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 记忆： （环配） &nbsp;&nbsp; 3个 &nbsp; <br><br>
+                        │ ├── dev.env.js&nbsp; // 开发环境变量（看词明意）<br><br>
+                        │ ├── index.js //项目一些配置变量<br><br>
+                        │ └── prod.env.js // 生产环境变量<br><br><br><br><span style="font-size:18px;color:#FF0000;"><strong>三、</strong></span><br>
+                        ├──node_modules// 项目依赖的模块&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;记忆： （依赖） &nbsp;&nbsp; *个 &nbsp; &nbsp; <br><br><br><br><br><span style="font-size:18px;color:#FF0000;">四、</span><br><br>
+                        ├── src// 源码目录&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5<br><br>
+                        1<br>
+                        │ ├──&nbsp; assets// 资源目录 <br><br>
+                        │ │ └── logo.png<br><br>
+                        2&nbsp;&nbsp; &nbsp;<br>
+                        │ ├── components// vue公共组件<br><br>
+                        │ │ └── Hello.vue<br><br>
+                        3<br>
+                        │ ├──router// 前端路由<br><br>
+                        │ │ └── index.js// 路由配置文件<br><br>
+                        4<br>
+                        │ ├── App.vue// 页面入口文件（根组件）<br><br>
+                        5<br>
+                        │ └── main.js// 程序入口文件（入口js文件）<br><br><br><br><strong><span style="font-size:18px;color:#FF0000;">五、</span></strong><br><br>
+                        └── static// 静态文件，比如一些图片，json数据等<br><br>
+                        │ ├── .gitkeep<br>
+                        &nbsp;&nbsp; &nbsp;<br><br><br><span style="font-size:18px;color:#FF0000;"><strong>剩余、</strong></span><br>
+                        ├── .babelrc// ES6语法编译配置<br><br>
+                        ├── .editorconfig// 定义代码格式<br><br>
+                        ├── .gitignore// git上传需要忽略的文件格式<br><br>
+                        ├── index.html// 入口页面<br><br>
+                        ├── package.json// 项目基本信息<br><br>
+                        ├── README.md// 项目说明<br><br><br>
+                    </div>
+                </div>
+
+                <div class="vue-router">
+                    <h2>Vue-Router</h2>
+                    <p>通过管理url，实现url和组件的对应和通过url进行组件之间的切换</p>
+                    <h5>使用步骤</h5>
+                    <ul>
+                        <li>
+                            <p class="a" style="line-height: 30px;">
+                                <span class="titles">router --- index.js</span><br>
+                                <i>引入Vue</i><br>
+                                import Vue from 'vue'<br>
+                                <i>引入模块</i><br>
+                                import Router from 'vue-router'<br>
+                                <i>import 导入组件</i><br>
+                                import HelloWorld from '@/components/HelloWorld'<br>
+                                <i>做为Vue的插件</i><br>
+                                Vue.use(Router)<br>
+                                <i>创建路由实例对象</i><br>
+                                export default new Router({<br>
+                                <i>vue-router 默认 hash 模式 改变为history</i><br>
+                                &nbsp;&nbsp;&nbsp;mode:'history',<br>
+                                <i>自定义路由激活状态的class名字</i><br>
+                                &nbsp;&nbsp;&nbsp;linkActiveClass:'is-active',<br>
+                                &nbsp;&nbsp;&nbsp;routes: [<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>定义路由路径</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: '/',<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>路径的名称</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: 'HelloWorld',<br>
+                                &nbsp;&nbsp;&nbsp;<i> 每个路由应该映射一个组件。</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;component: HelloWorld<br>
+                                &nbsp;&nbsp;&nbsp;<i> 给路由设置一个别名</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alias: '/index'<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>无对应路由跳转</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: '*',<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;component: nofund404<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>重定向</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redirect: '/index'<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redirect: {path: '/index'}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redirect: {name: 'index'}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>动态重定向 to = 目标路径对象</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redirect:(to)=>{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(to.path==='/123'){<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return '/index'<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;]<br>
+                                })
+                            </p>
+                        </li>
+                        <li>
+                            <p class="a" style="line-height: 40px;">
+                                <span class="titles">入口文件 --- main.js</span><br>
+                                import Vue from 'vue'<br>
+                                import App from './App'<br>
+                                import router from './router'<br>
+
+                                Vue.config.productionTip = false<br>
+
+                                new Vue({<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;el: '#app',<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;router,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;components: { App },<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template: '<span><</span>App/>'<br>
+                                })<br>
+                                <span class="titles">vue-html</span>
+                                <br><span><</span>div id="app">
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>使用 router-link 组件来导航.</i>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>通过传入 `to` 属性指定链接</i>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><router-link> 默认会被渲染成一个 ` <span><</span>a>` 标签 </i>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link to="/foo">Go to Foo<span><</span>/router-link>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>变量的形式</i>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link :to="index">Go to Bar<span><</span>/router-link>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>对象形式</i>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link :to="{path:'/foo'}">foo<span><</span>/router-link>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>不生成a标签，生成自定义标签 </i>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link :to="/foo" tag="li">foo<span><</span>/router-link>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>自定义属性，激活状态路由class类名 </i>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link active-class="isactive">foo<span><</span>/router-link>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>自定义路由事件状态 </i>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link event="mouseover">foo<span><</span>/router-link>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i> 路由匹配到的组件将渲染在这里</i>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-view><span><</span>/router-view>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i> 渲染的组件可自定义class或样式</i>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-view class="active"><span><</span>/router-view>
+                                <br><span><</span>/div>
+                            </p>
+
+                        </li>
+                    </ul>
+                    <h5>文件引入公用的css</h5>
+                    <p class="a">
+                        <span class="titles" style="line-height: 50px;" >公用app.css</span><br>
+                            @import '/reset.css';<br>
+                            @import '/reset.css';<br>
+                            @import '/reset.css';<br>
+                        <span class="titles" style="line-height: 50px;">main.js</span><br>
+                        @import '@/assets/app.css';<br>
+                        <span style="font-size: 20px;color: #7d4444;line-height: 50px;">如果不想加后缀名css</span><br>
+                        <span class="titles" style="line-height: 50px;" >webpack.base.conf.js</span><br>
+                        extensions: ['.js', '.vue', '.json','.css'],
+                    </p>
+                </div>
 
             </div>
         </div>

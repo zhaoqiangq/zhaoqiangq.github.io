@@ -21,6 +21,12 @@ p.a {
   text-indent: 0;
   line-height: 25px;
   font-size: 16px; }
+  p.a i {
+    color: #ccc;
+    margin-left: 20px; }
+  p.a span.titles {
+    color: #585858;
+    font-size: 25px; }
 
 .jianjie {
   width: 100%;
@@ -218,3 +224,27 @@ p.a {
   box-sizing: border-box; }
   .zujian p.bb {
     text-indent: 0; }
+  .zujian img {
+    width: 300px;
+    display: block;
+    margin: 0 auto; }
+
+.vue-router {
+  color: rgba(51, 51, 51, 0.7);
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box; }
+  .vue-router ul {
+    width: 100%; }
+    .vue-router ul:after {
+      content: "";
+      clear: both;
+      height: 0;
+      line-height: 0;
+      display: block; }
+    .vue-router ul li {
+      width: 50%;
+      float: left; }
+      .vue-router ul li:first-child {
+        border-right: 1px solid #ccc;
+        box-sizing: border-box; }
