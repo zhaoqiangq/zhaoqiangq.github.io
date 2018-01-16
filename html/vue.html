@@ -696,6 +696,18 @@
                 </div>
 
                 <div class="vue-router">
+                    <h5>文件引入公用的css</h5>
+                    <p class="a">
+                        <span class="titles" style="line-height: 50px;" >公用app.css</span><br>
+                        @import '/reset.css';<br>
+                        @import '/reset.css';<br>
+                        @import '/reset.css';<br>
+                        <span class="titles" style="line-height: 50px;">main.js</span><br>
+                        @import '@/assets/app.css';<br>
+                        <span style="font-size: 20px;color: #7d4444;line-height: 50px;">如果不想加后缀名css</span><br>
+                        <span class="titles" style="line-height: 50px;" >webpack.base.conf.js</span><br>
+                        extensions: ['.js', '.vue', '.json','.css'],
+                    </p>
                     <h2>Vue-Router</h2>
                     <p>通过管理url，实现url和组件的对应和通过url进行组件之间的切换</p>
                     <h5>使用步骤</h5>
@@ -718,7 +730,7 @@
                                 <i>自定义路由激活状态的class名字</i><br>
                                 &nbsp;&nbsp;&nbsp;linkActiveClass:'is-active',<br>
                                 &nbsp;&nbsp;&nbsp;routes: [<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>定义路由路径</i><br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: '/',<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>路径的名称</i><br>
@@ -726,7 +738,13 @@
                                 &nbsp;&nbsp;&nbsp;<i> 每个路由应该映射一个组件。</i><br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;component: HelloWorld<br>
                                 &nbsp;&nbsp;&nbsp;<i> 给路由设置一个别名</i><br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alias: '/index'<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alias: '/index',<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>二级子路由(如果有二级路由、父路由不需要name)</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;children:[<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{path:'/study',component:study}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>默认自路由(如果有二级路由、父路由不需要name)</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{path:'',name:'HelloWorld',component:study}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>无对应路由跳转</i><br>
@@ -772,33 +790,117 @@
                                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link :to="index">Go to Bar<span><</span>/router-link>
                                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>对象形式</i>
                                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link :to="{path:'/foo'}">foo<span><</span>/router-link>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>name形式</i>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link :to="{name:'foo'}">foo<span><</span>/router-link>
                                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>不生成a标签，生成自定义标签 </i>
                                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link :to="/foo" tag="li">foo<span><</span>/router-link>
                                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>自定义属性，激活状态路由class类名 </i>
                                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link active-class="isactive">foo<span><</span>/router-link>
                                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>自定义路由事件状态 </i>
                                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link event="mouseover">foo<span><</span>/router-link>
-                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i> 路由匹配到的组件将渲染在这里</i>
-                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-view><span><</span>/router-view>
-                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i> 渲染的组件可自定义class或样式</i>
-                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-view class="active"><span><</span>/router-view>
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i> 二级组件</i>
+                                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link to="/index/study">foo<span><</span>/router-link>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i> 默认二级导航</i>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link to="/index">foo<span><</span>/router-link>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i> 精确匹配</i>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link exact">foo<span><</span>/router-link>
+                                   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i> 路由匹配到的组件将渲染在这里</i>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-view><span><</span>/router-view>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i> 渲染的组件可自定义class或样式</i>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-view class="active"><span><</span>/router-view>
                                 <br><span><</span>/div>
                             </p>
 
                         </li>
                     </ul>
-                    <h5>文件引入公用的css</h5>
-                    <p class="a">
-                        <span class="titles" style="line-height: 50px;" >公用app.css</span><br>
-                            @import '/reset.css';<br>
-                            @import '/reset.css';<br>
-                            @import '/reset.css';<br>
-                        <span class="titles" style="line-height: 50px;">main.js</span><br>
-                        @import '@/assets/app.css';<br>
-                        <span style="font-size: 20px;color: #7d4444;line-height: 50px;">如果不想加后缀名css</span><br>
-                        <span class="titles" style="line-height: 50px;" >webpack.base.conf.js</span><br>
-                        extensions: ['.js', '.vue', '.json','.css'],
-                    </p>
+                    <h5>多个视图（例如：侧边栏）</h5>
+                    <ul>
+                        <li>
+                            <p class="a">
+                                <span class="titles">router --- index.js</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path:'document'<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:'Document'<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>多个视图</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;components:{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>默认组件</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default:document<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>name所对应的组件</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;slide:slide<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+
+                            </p>
+                        </li>
+                        <li>
+                            <p class="a">
+                                <span class="titles">vue-html</span>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i> 多个视图组件</i>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-view><span><</span>/router-view>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-view name="slide"><span><</span>/router-view>
+                            </p>
+                        </li>
+                    </ul>
+                    <h5>滚动行为（保留客户滚动条的位置）</h5>
+                    <ul>
+                        <li>
+                            <p class="a">
+                                <span class="titles">router --- index.js</span><br>
+                                &nbsp;&nbsp;&nbsp;<i>点击浏览器前进后退或点击导航切换</i><br>
+                                &nbsp;&nbsp;&nbsp;scrollBehavior(to,form,savePosition){<br>
+                                <i>to 目标路由对象 =  form 离开路由对象 </i><br>
+                                <i>savePositin 记录滚动条坐标 点击前进后退记录值</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(savePosition){<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return savePosition<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return {x:0,y:0}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                <i>也可以利用hash 锚地来定位到那个位置</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(to.hash){<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return :{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;selector: to.hash<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;}<br>
+
+                            </p>
+                        </li>
+                        <li>
+                            <p class="a">
+                                <span class="titles">vue-html</span>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i> 利用hash定位锚点</i>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-view to="/index#abc"<span><</span>/router-view>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>切换路由来定位到锚点的位置</i>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>p id="abc"><span><</span>/p>
+                            </p>
+                        </li>
+                    </ul>
+                    <h5>动态路径参数</h5>
+                    <ul>
+                        <li>
+                            <p class="a">
+                                <span class="titles">router --- index.js</span><br>
+                                   <br>&nbsp;&nbsp;&nbsp;<i>user （例如：个人中心）</i>
+                                   <br>&nbsp;&nbsp;&nbsp;{
+                                   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: '/user/:userid?', <i>?正则可以匹配一次或多次</i>
+                                   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;component: user
+                                   <br>&nbsp;&nbsp;&nbsp;}
+
+                            </p>
+                        </li>
+                        <li>
+                            <p class="a">
+                                <span class="titles">vue-html</span>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link to="'/index/'+item.id"<span><</span>/router-link>
+
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;created(){
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log($this.route )路由信息
+                                <br><i>找到对应的id向后台请求数据</i>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this.route.params.userid
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                            </p>
+                        </li>
+                    </ul>
                 </div>
 
             </div>
