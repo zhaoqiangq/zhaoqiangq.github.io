@@ -1528,6 +1528,127 @@
                             </p>
                         </li>
                     </ul>
+                    <ul>
+                        <li>
+                            <h5>Axios</h5>
+                            <p class="b" style="line-height: 60px">
+                                基于Promise用于浏览器和nodejs的与服务器通讯库<br>
+                                <span style="font-size: 25px">特性</span><br>
+                                支持Promise API<br>
+                                拦截请求和响应<br>
+                                转换请求和响应数据<br>
+                                取消请求<br>
+                                自动转化JOSN数据<br>
+                                <span style="font-size: 25px">npm</span><br>
+                                npm install axios vue-axios --save<br>
+                                <span style="font-size: 25px">Mock模拟数据</span><br>
+                                http://easy-mock.com<br>
+                            </p>
+                        </li>
+                        <li>
+                            <h5 style="margin-left: 20px">使用axios</h5>
+                            <p class="b">
+                                export default{<br>
+                                     &nbsp;&nbsp;&nbsp;created(){<br>
+                                         &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;axios.get('url',{<br>
+                                            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params:{<br>
+                                &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;abc:'111'<br>
+                                            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;})<br>
+                                &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;axios.post('url',{<br>
+                                &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;abc:'111'<br>
+                                &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;})<br>
+                                         &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;.then((response) =>{<br>
+                                         &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;})<br>
+                                         &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;.catch((error)=>{<br>
+                                         &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;})<br>
+                                     &nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h5>自定义请求实例</h5>
+                            <p class="b">
+                                <span style="font-size: 20px">创建</span><br>
+                                axios.create(config)<br>
+                                <span style="font-size: 20px">配置</span><br>
+                                {<br>
+                                    &nbsp;&nbsp;&nbsp;baseURL:'',<br>
+                                    &nbsp;&nbsp;&nbsp;timeout:1000,<br>
+                                    &nbsp;&nbsp;&nbsp;headers:{},<br>
+                                    &nbsp;&nbsp;&nbsp;responseType:'json',<br>
+                                    &nbsp;&nbsp;&nbsp;params:{},<br>
+                                    &nbsp;&nbsp;&nbsp;transformRequest:[],<br>
+                                    &nbsp;&nbsp;&nbsp;transformResponse:[],<br>
+                                    &nbsp;&nbsp;&nbsp;validateStatus:function(){},<br>
+                                    &nbsp;&nbsp;&nbsp;cancelToken<br>
+                                }<br>
+                                application/x-mmm-form-urlencoded<br>
+                                <h5>同时请求二条数据</h5>
+                            <p class="b">
+                                created(){<br>
+                                &nbsp;&nbsp;&nbsp;function http1(){<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return HTTP.get('test-axios')<br>
+                                &nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;function http1(){<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return HTTP.get('test-axios')<br>
+                                &nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;axios.all([http1(),http2()])<br>
+                                &nbsp;&nbsp;&nbsp;.then(axios.spread((res1,res2)=>{<br>
+                                &nbsp;&nbsp;&nbsp;}))<br>
+                                &nbsp;&nbsp;&nbsp;.catch((error)=>{<br>
+                                &nbsp;&nbsp;&nbsp;})<br>
+                                }
+                            </p>
+
+                            </p>
+                        </li>
+                        <li>
+                            <p class="b">
+                                安装axios<br>
+                                npm install axios vue-axios --save<br>
+                               <i>main.js</i> <br>
+                                import Axios from 'axios'<br>
+                                import VueAxios from 'vue-axios'<br>
+                                Vue.use(VueAxios,Axios)<br>
+                                <i>使用全局axios</i><br>
+                                this.$http.get(url)<br>
+                                .then((res)=>{})<br>
+                                .catch((error)=>{})<br>
+                                <i>组件中</i><br>
+                                import axios from 'axios'<br>
+                                var HTTP = axios.create({<br>
+                                <i>公共的url主路径</i><br>
+                                baseURL:'公用url',<br>
+                                <i>连接超时中断请求 1==1毫秒</i><br>
+                                timeout:1000,<br>
+                                <i>自动转化为json数据对象</i><br>
+                                responseType:'json',<br>
+                                <i>查询字符串在url后面</i><br>
+                                params:{<br>
+                                &nbsp;&nbsp;&nbsp; book:'123'<br>
+                                }<br>
+                                <i>请求头传入参数</i><br>
+                                headers:{<br>
+                                &nbsp;&nbsp;&nbsp; 'custome-header':'miaov'<br>
+                                }<br>
+                                })<br>
+                                <br>
+                                export default {<br>
+                                    &nbsp;&nbsp;&nbsp;created(){<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTTP.get('url/路径')<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then((response)=>{<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.catch((error)=>{<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                                    &nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
+                            </p>
+
+                        </li>
+                    </ul>
                 </div>
 
             </div>
