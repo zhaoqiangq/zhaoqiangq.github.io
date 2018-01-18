@@ -1291,6 +1291,7 @@
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resolve(require(依赖,回调函数,[chunk名字]))<br>
                                     &nbsp;&nbsp;&nbsp;import函数<br>
                             </p>
+                            <div style="width: 100%;height: 600px"></div>
                         </li>
                         <li>
                             <span style="font-size: 20px;margin-left: 20px;">
@@ -1351,7 +1352,182 @@
                 </div>
 
                 <div class="vuex">
-                    <h5>vuex</h5>
+
+                    <h2>vuex</h2>
+                    <ul>
+                    <li>
+                        <h5>vuex是什么</h5>
+                        <p class="b" style="line-height: 80px;">
+                            专为Vue.js应用程序开发的状态管理模式<br>
+                            采用集中式储存管理应用的所有组件状态<br>
+                            以相应的规则保证状态以一种可预测的方式发生变化<br>
+                            <span style="font-size: 25px;">状态</span><br>
+                            组件内部状态：仅在一个组件内使用的状态(data字段)<br>
+                            应用级别状态：多个组件共用的状态<br>
+                            <span style="font-size: 25px;">什么情况下使用Vuex</span><br>
+                            多个视图依赖于同一状态<br>
+                            来自不同视图的行为需要变更同一状态
+                        </p>
+                    </li>
+                    <li>
+                            <h5 style="margin-left: 20px;">安装vue</h5>
+                            <p class="b">
+                                安装模块<br>
+                                npm install vuex --save<br>
+                                新建store---index.js<br>
+                                import Vue from 'vue'<br>
+                                import Vuex from 'vuex'<br>
+                                作为插件<br>
+                                vue.use(Vuex)<br>
+                                let store  = new Vuex.Store({<br>
+
+                                })<br>
+                                export default store<br>
+                                main.js<br>
+                                import store from './store'<br>
+
+                                new Vue({<br>
+                                    el:'#app',<br>
+                                    router,<br>
+                                    store,<br>
+                                    template:'<App/>',<br>
+                                    components:{App}<br>
+                                })<br>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h5>Vuex核心概念</h5>
+                            <p class="b">
+                                store:类似容器，包含应用的大部分状态<br>
+                                &nbsp;&nbsp;&nbsp; 一个页面只能有一个store<br>
+                                &nbsp;&nbsp;&nbsp;状态储存是响应式的<br>
+                                &nbsp;&nbsp;&nbsp;不能直接改变store中的状态，唯一途径显示地提交mutations<br>
+                                state:包含所有应用级别状态的对象<br>
+                                getters:在组件内部获得store中状态的函数<br>
+                                mutations:唯一修改状态的事件回调函数<br>
+                                actions:包含异步操作、提交mutations改变状态 <br>
+                                modules:将store分割成不同的模块
+
+                            </p>
+                        </li>
+                        <li>
+                            <img src="../images/vue08.png" style="width: 100%" alt="">
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h5>store实例</h5>
+                            <p class="b">
+                                let store = new Vuex.Store({<br>
+                                    &nbsp;&nbsp;&nbsp;state:{<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count:100<br>
+                                    &nbsp;&nbsp;&nbsp;},<br>
+                                &nbsp;&nbsp;&nbsp;getters:{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filterCount(state){<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return state.count >= 120? 120 :state.count<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;},<br>
+                                    &nbsp;&nbsp;&nbsp;mutations:{<br>
+                                    <i>payload接受的参数</i><br>
+                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; addIncrement(state,payload){<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state.count += payload.n;<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                    &nbsp;&nbsp;&nbsp;}<br>
+                                <i>异步操作</i><br>
+                                &nbsp;&nbsp;&nbsp;actions:{<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addAction(context){<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setTimeout(()=>{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context.commit('addIncrement',{n:5})<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context.dispatch('textAction',{text:'测试'})<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},1000)<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;textAction(context,obj){<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(obj)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;}<br>
+                                })<br>
+                            </p>
+                        </li>
+                        <li>
+                            <h5 style="margin-left: 20px">组件中获取roux.store</h5>
+                            <p class="b">
+                                export default:{<br>
+                                    &nbsp;&nbsp;&nbsp;computed:{<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num(){<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this.$store.state.count<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num2(){<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this.$store.getters.filterCount<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                    &nbsp;&nbsp;&nbsp;},<br>
+                                    &nbsp;&nbsp;&nbsp;methods:{<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addHandle(){<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>改变状态，提交mutation addIncrement</i><br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.$store.commit('addIncrement',{
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n:5<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                <i>异步操作 提交一个action</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delHandle(){<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.$store.dispatch('addAction')<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                    &nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h5>vuex辅助函数</h5>
+                            <p class="b" style="line-height: 50px">
+                                mapState<br>
+                                mapGetters<br>
+                                mapMutations<br>
+                                mapActions<br>
+                            </p>
+                            <h5>代码分割</h5>
+                            <p class="b">
+                                let selectModule = {<br>
+                                     &nbsp;&nbsp;&nbsp;state:{},<br>
+                                     &nbsp;&nbsp;&nbsp;mutations:{},<br>
+                                }<br>
+                                let store = new Vue.Store({<br>
+                                    &nbsp;&nbsp;&nbsp;state:{},<br>
+                                    &nbsp;&nbsp;&nbsp;mutations:{},<br>
+                                    &nbsp;&nbsp;&nbsp;modules:{<br>
+                                &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;selectModule<br>
+                                    &nbsp;&nbsp;&nbsp;}<br>
+                                })<br>
+                                <i>取值加上模块</i><br>
+                                this.$store.state.selectModule.title<br>
+                            </p>
+                        </li>
+                        <li>
+                            <p class="b">
+                                import {mapState,mapGetters,mapMutations,mapActions} from 'vuex'<br>
+                                <span><</span>input @click="deHandle({de:5})"><br>
+                                export default{<br>
+                                    &nbsp;&nbsp;&nbsp;computed:{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...mapState(['count'])<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...mapGetters({<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num2:'filterCount'<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                                    &nbsp;&nbsp;&nbsp;},<br>
+                                &nbsp;&nbsp;&nbsp;methods:{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...mapActions({<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addHandle:'addAction'<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...mapMutations({<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delHandle:'deIncrement'<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                                &nbsp;&nbsp;&nbsp;},<br>
+                                }<br>
+                            </p>
+                        </li>
+                    </ul>
                 </div>
 
             </div>
