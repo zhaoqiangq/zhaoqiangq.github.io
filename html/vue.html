@@ -713,7 +713,7 @@
                     <h5>使用步骤</h5>
                     <ul>
                         <li>
-                            <p class="a" style="line-height: 30px;">
+                            <p class="a" style="line-height: 33px;">
                                 <span class="titles">router --- index.js</span><br>
                                 <i>引入Vue</i><br>
                                 import Vue from 'vue'<br>
@@ -833,7 +833,7 @@
                             </p>
                         </li>
                         <li>
-                            <p class="a">
+                            <p class="a" style="line-height: 50px;">
                                 <span class="titles">vue-html</span>
                                 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i> 多个视图组件</i>
                                 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-view><span><</span>/router-view>
@@ -882,7 +882,9 @@
                                 <span class="titles">router --- index.js</span><br>
                                    <br>&nbsp;&nbsp;&nbsp;<i>user （例如：个人中心）</i>
                                    <br>&nbsp;&nbsp;&nbsp;{
-                                   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: '/user/:userid?', <i>?正则可以匹配一次或多次</i>
+                                   <br>         <i>tip 判断是否为vip userid </i>
+                                   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: '/user/:tip?/:userid?',
+                                   <br>       <i>?正则可以匹配一次或多次</i>
                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;component: user
                                    <br>&nbsp;&nbsp;&nbsp;}
 
@@ -891,8 +893,20 @@
                         <li>
                             <p class="a">
                                 <span class="titles">vue-html</span>
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link to="'/index/'+item.id"<span><</span>/router-link>
-
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link :to="{path:'/user/'+item.tip+'/'+item.id"><span><</span>/router-link>
+                                <br> <i>添加查询字符串</i>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link exact :to="{path:'',query:{info:'follow'}}">他的关注<span><</span>/router-link>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-link :to="{path:'',query:{info:'share',a:1}}">分享<span><</span>/router-link>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>获取传入的字符串</i>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>div>{{$route.query}}<span><</span>div>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>默认选择关注</i>
+                                <br><span><</span>router-link :to="{path:'/user/'+item.tip+'/'+item.id,query:{info:'follow'}}">默认选择关注<span><</span>/router-link>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;watch(){
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>监控$route 的变化</i>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$route(){
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.....
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
                                 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;created(){
                                 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log($this.route )路由信息
                                 <br><i>找到对应的id向后台请求数据</i>
@@ -901,6 +915,443 @@
                             </p>
                         </li>
                     </ul>
+                    <ul>
+                        <li>
+                            <h5>对组件注入</h5>
+                            <p class="b" style="line-height: 70px;">
+                                通过在vue根实例的router配置传入router实例<br>
+                                $router router实例对象<br>
+                                $route 当前激活的路由信息对象<br>
+                                beforeRouteEnter() 进入组件前钩子函数<br>
+                                beforeRouteLeave() 离开组件前钩子函数<br>
+                            </p>
+                        </li>
+                        <li>
+                            <h5 style="margin-left: 20px;">路由信息对象</h5>
+                            <p class="b">
+                                一个路由信息对象表示当前激活的路由的状态信息,每次成功的导航后都会产生一个新的对象<br>
+                                path 字符串，对应当前路由的路径<br>
+                                params 对象，包含动态路由参数<br>
+                                query 对象，URL查询参数<br>
+                                hash 字符串，当前路由的hash值<br>
+                                fullPath 字符串，URL包含查询参数和hash的完整路径<br>
+                                matched 数组，包含当前路由的所有嵌套路径片段的路由记录<br>
+                                name 字符串，当前路由的名称
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h5>过渡动效</h5>
+                            <p class="b">
+                                提供了transition的封装组件，添加过渡动效<br>
+                                添加删除css类名<br>
+                                v-enter: 定义进入过渡的开始状态<br>
+                                v-enter-active: 定义进入活动状态<br>
+                                v-enter-to: 定义进入的结束状态<br>
+                                v-leave:定义离开过渡的开始状态<br>
+                                v-leave-active:定义离开过渡的活动状态<br>
+                                v-leave-to:定义离开过渡的结束状态<br>
+                                使用name属性改变类名的前缀
+                            </p>
+                            <h5>过渡模式</h5>
+                            <p class="b">
+                                in-out: 新元素先进行过渡，完成之后当前元素过渡离开<br>
+                                out-in: 当前元素先进行过渡，完成之后新元素过渡进行
+                            </p>
+                        </li>
+                        <li>
+                            <h5 style="margin-left: 20px;"></h5>
+                            <p class="b">
+                                <i>可设置所对应的name</i><br>
+                                <i>mode="过渡模式"</i><br>
+                                <span><</span>transition mode="in-out"><br>
+                                &nbsp;&nbsp;&nbsp;<span><</span>router-view><span><</span>/router-view><br>
+                                <span><</span>/transition>
+                                <br><span><</span>style>
+                                <br>&nbsp;&nbsp;&nbsp;v-enter{ opacity:0}
+                                <br>&nbsp;&nbsp;&nbsp;v-enter-to{ opacity:1}
+                                <br>&nbsp;&nbsp;&nbsp;v-enter-active{ transition:1s}
+                                <br>&nbsp;&nbsp;&nbsp;v-leave{ opacity:0}
+                                <br>&nbsp;&nbsp;&nbsp;v-leave-to{ opacity:1}
+                                <br>&nbsp;&nbsp;&nbsp;v-leave-active{ transition:1s}
+                                <br><span><</span>/style><br>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h5>左右过渡动效</h5>
+                            <p class="b">
+                                routes: [<br>
+                                &nbsp;&nbsp;&nbsp;{path: '/',name: 'index',<br>
+                                &nbsp;&nbsp;&nbsp;<i>index为每个组件的识别信息</i><br>
+                                &nbsp;&nbsp;&nbsp;meta: {index: 0,title:'index'},<br>
+                                &nbsp;&nbsp;&nbsp;component: index}<br>
+                                ]<br>
+                                watch:{<br>
+                                    &nbsp;&nbsp;&nbsp;$route(to,from){<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(to.meta.index< from.meta.index){<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.names = 'right'<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.names = 'left'<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                    &nbsp;&nbsp;&nbsp;}<br>
+                                },<br>
+                                data(){<br>
+                                   &nbsp;&nbsp;&nbsp;return{<br>
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;names:'left'<br>
+                                   &nbsp;&nbsp;&nbsp;}<br>
+                                }
+                            </p>
+                            <h5>路由元信息</h5>
+                            <p class="b">
+                                在路由配置中meta可以配置一些数据，用在路由信息对象中<br>
+                                访问mete中的数据：$route.meta
+                            </p>
+                        </li>
+                        <li>
+                            <p class="b">
+                                <span><</span>transition :name="names"><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><</span>router-view class="center"><span><</span>/router-view><br>
+                                <span><</span>/transition><br>
+                                <span><</span>style><br>
+                                    <i>对应name属性  === left</i><br>
+                                    .left-enter{        transform: translateX(100%);}<br>
+                                    .left-enter-to{     transform: translateX(0);}<br>
+                                    .left-enter-active{ transition:1s;}<br>
+                                    .left-leave{        transform: translateX(0); }<br>
+                                    .left-leave-to{     transform: translateX(-100%);}<br>
+                                    .left-leave-active{ transition:1s;}<br>
+                                    <i>对应name属性 </i><br>
+                                    .right-enter{       transform: translateX(-100%);}<br>
+                                    .right-enter-to{    transform: translateX(0);}<br>
+                                    .right-enter-active{transition:2s;}<br>
+                                    .right-leave{       transform: translateX(0);}<br>
+                                    .right-leave-to{    transform: translateX(100%);}<br>
+                                    .right-leave-active{transition:1s;}<br>
+                                <span><</span>/style>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h5>编程式导航</h5>
+                            <p class="b" style="line-height: 63px;">
+                                back    回退一步<br>
+                                forward 前进一步<br>
+                                go 指定前进回退步数<br>
+                                push 导航到不同url,向history栈添加一个新的记录<br>
+                                replace 导航到不同url，替换history栈中当前记录<br>
+                                <span><</span>input value="后退" @click="backHandle"><br>
+                                <span><</span>input value="前进" @click="forwardHandle"><br>
+                                <span><</span>input value="前进2步" @click="goHandle"><br>
+                                <span><</span>input value="后退2步" @click="fgoHandle"><br>
+                                <span><</span>input value="跳到指定位置push" @click="pushHandle"><br>
+                                <span><</span>input value="替换当前的记录replace" @click="replaceHandle"><br>
+                            </p>
+                        </li>
+                        <li>
+                            <p class="b">
+
+                                methods:{<br>
+                                    &nbsp;&nbsp;&nbsp;backHandle(){<br>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   this.$router.back();<br>
+                                     &nbsp;&nbsp;&nbsp;},<br>
+                                    &nbsp;&nbsp;&nbsp;forwardHandle(){<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.$router.forward();<br>
+                                     &nbsp;&nbsp;&nbsp;},<br>
+                                    &nbsp;&nbsp;&nbsp;goHandle(){<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.$router.go(2);<br>
+                                    &nbsp;&nbsp;&nbsp;},<br>
+                                    &nbsp;&nbsp;&nbsp;fgoHandle(){<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.$router.go(-2);<br>
+                                &nbsp;&nbsp;&nbsp;},<br>
+                                    &nbsp;&nbsp;&nbsp;pushHandle(){<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.$router.push('/user');<br>
+                                &nbsp;&nbsp;&nbsp;},<br>
+                                    &nbsp;&nbsp;&nbsp;replaceHandle(){<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.$router.replace('/user');<br>
+                                &nbsp;&nbsp;&nbsp;}<br>
+                                }
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h5>导航钩子函数</h5>
+                            <p class="b" style="line-height: 65px">
+                                导航发生变化时，导航钩子主要用来拦截导航，完成跳转或取消<br>
+                                执行钩子函数位置<br>
+                                &nbsp;&nbsp;&nbsp;route全局<br>
+                                &nbsp;&nbsp;&nbsp;单个路由<br>
+                                &nbsp;&nbsp;&nbsp;组件中<br>
+                                钩子函数<br>
+                                &nbsp;&nbsp;&nbsp;router实例上：beforeEach、afterEach<br>
+                                &nbsp;&nbsp;&nbsp;单个路由中：beforeEnter<br>
+                                &nbsp;&nbsp;&nbsp;组件内的钩子beforeRouteEnter、beforeRouteUpdate、beforeRouteLeave<br>
+                                钩子函数接收的参数<br>
+                                &nbsp;&nbsp;&nbsp;to: 要进入的目标 路由对象 到那里去<br>
+                                &nbsp;&nbsp;&nbsp;form: 正要离开导航的路由对象 从哪里来<br>
+                                &nbsp;&nbsp;&nbsp;next: 用来决定跳转或取消导航<br>
+                            </p>
+                        </li>
+                        <li>
+                            <h5 style="margin-left: 20px;">route全局</h5>
+                            <p class="b" style="line-height: 30px;">
+                                <i>需要登录判断</i><br>
+                                { <br>
+                                 &nbsp;&nbsp;&nbsp;path: '/me',<br>
+                                 &nbsp;&nbsp;&nbsp;component: me,<br>
+                                <i>在导航文件中设置</i><br>
+                                 &nbsp;&nbsp;&nbsp;beforeEnter(to,form,next){<br>
+                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;next('/login')<br>
+                                 &nbsp;&nbsp;&nbsp;},<br>
+                                <i> login需要登录</i><br>
+                                &nbsp;&nbsp;&nbsp;meta: {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index: 5, <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;login: true,<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: 'me'<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;}<br>
+                                router.beforeEach((to,from,next)=>{<br>
+                                    &nbsp;&nbsp;&nbsp;if(to.meta.login){  <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;next('/login')<br>
+                                    &nbsp;&nbsp;&nbsp;}else {<br>
+                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;next()<br>
+                                    &nbsp;&nbsp;&nbsp;}<br>
+                                })<br>
+                                <br>
+                                <i>设置title</i><br>
+                                router.afterEach((to,from)=>{<br>
+                                     &nbsp;&nbsp;&nbsp;if(to.meta.title){<br>
+                                     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;window.document.title = to.meta.title<br>
+                                     &nbsp;&nbsp;&nbsp;}else {<br>
+                                     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;window.document.title = 'xiaoqiang'<br>
+                                    &nbsp;&nbsp;&nbsp;}<br>
+                                })<br>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h5>组件中route</h5>
+                            <p class="b" style="line-height: 50px;">组件内的钩子<br>
+                                <i>进入的钩子</i><br>
+                                &nbsp;&nbsp;&nbsp;beforeRouteEnter<br>
+                                <i>二级导航更新时的钩子函数</i><br>
+                                &nbsp;&nbsp;&nbsp;beforeRouteUpdate<br>
+                                <i>离开时的钩子函数</i><br>
+                                &nbsp;&nbsp;&nbsp;beforeRouteLeave<br>
+                                钩子函数接收的参数<br>
+                                &nbsp;&nbsp;&nbsp;to: 要进入的目标 路由对象 到那里去<br>
+                                &nbsp;&nbsp;&nbsp;form: 正要离开导航的路由对象 从哪里来<br>
+                                &nbsp;&nbsp;&nbsp;next: 用来决定跳转或取消导航<br>
+                            </p>
+                        </li>
+                        <li>
+                            <p class="b">
+                                <i>进入的钩子</i><br>
+                                beforeRouteEnter(to,form,next){<br>
+                                    &nbsp;&nbsp;&nbsp;next(vm) =>{<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>vm === this</i><br>
+                                    &nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
+                                <i>二级导航更新时的钩子行数</i>
+                                beforeRouteUpdate(to,form,next){<br>
+                                &nbsp;&nbsp;&nbsp;next();<br>
+                                }<br>
+                                <br>
+                                <i>离开时的钩子函数</i><br>
+                                beforeRouteLeave(to,form,next){<br>
+                                &nbsp;&nbsp;&nbsp;next();<br>
+                                }
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h5>vue插件</h5>
+                            <p class="b" style="line-height: 55px;">
+                                新建一个lib插件文件<br>
+                                &nbsp;&nbsp;&nbsp;lib里面新建一个utils.js<br>
+                                在main.js里配置<br>
+                                &nbsp;&nbsp;&nbsp;引入插件模块<br>
+                                &nbsp;&nbsp;&nbsp;import Utils from '@/bil/utils'<br>
+                                &nbsp;&nbsp;&nbsp;做为插件全局使用<br>
+                                &nbsp;&nbsp;&nbsp;Vue.use(Utils)<br>
+                                <span style="font-size: 25px;">使用插件</span><br>
+                                this.$local
+                            </p>
+                        </li>
+                        <li>
+                            <span style="font-size: 20px;margin-left: 30px;">utils.js</span><br>
+                            <p class="b">
+                            let local = {<br>
+                                &nbsp;&nbsp;&nbsp;save (key, value) {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localStorage.setItem(key, JSON.stringify(value))<br>
+                                &nbsp;&nbsp;&nbsp;},<br>
+                                &nbsp;&nbsp;&nbsp;fetch (key) {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return JSON.parse(localStorage.getItem(key)) || {}<br>
+                                &nbsp;&nbsp;&nbsp;}<br>
+                            }<br>
+
+                            export default {<br>
+                                &nbsp;&nbsp;&nbsp;install: function (vm) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vm.prototype.$local = local<br>
+                                &nbsp;&nbsp;&nbsp;}<br>
+                            }<br>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h5>登录状态后跳转的组件</h5>
+                            <p class="b">
+                                router.beforeEach((to, from, next) => {<br>
+                                <i>判断是否需要登录</i><br>
+                                    &nbsp;&nbsp;&nbsp;if(info.login){<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;next()<br>
+                                    &nbsp;&nbsp;&nbsp;}else {<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;router.push({<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path:'/login',<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query:{<br>
+                                <i>传入登录后跳转的路径</i><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redirect: to.path.slice(1)<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                                    &nbsp;&nbsp;&nbsp;}<br>
+                                })
+                            </p>
+                        </li>
+                        <li>
+                            <p class="b">
+                                <i>获取传过来的path跳转路径</i><br>
+                                let redirect = this.$route.query.redirect<br>
+                                <i>判断是否有跳转路径</i><br>
+                                if(!redirect){<br>
+                                &nbsp;&nbsp;&nbsp;redirect = 'project'<br>
+                                }<br>
+                                this.$router.push({<br>
+                                &nbsp;&nbsp;&nbsp;path: '/'+redirect<br>
+                                })<br>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                        <h5>Vue面包屑</h5>
+
+                        <p class="b">
+
+                            watch:{<br>
+                                &nbsp;&nbsp;&nbsp;$route(){<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.flag = flags[this.$route.path.slice(1)]<br>
+                                &nbsp;&nbsp;&nbsp;}<br>
+                            }<br>
+                            beforeRouteEnter(to,form,next){<br>
+                                &nbsp;&nbsp;&nbsp;next((vm)=>{<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vm.flag = flags[vm.path.slice(1)]<br>
+                                &nbsp;&nbsp;&nbsp;})<br>
+                            }<br>
+                        </p>
+                        </li>
+                        <li>
+                            <p class="b">
+                                数据<br>
+                                let flags = {<br>
+                                &nbsp;&nbsp;&nbsp;project:'我的项目',<br>
+                                &nbsp;&nbsp;&nbsp;workbench:'工作台',<br>
+                                &nbsp;&nbsp;&nbsp;doc:'我的文档'<br>
+                                }<br>
+                                <br>
+                                data(){<br>
+                                &nbsp;&nbsp;&nbsp;return:{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flag = ''<br>
+                                &nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h5>vue懒加载</h5>
+                            <p>
+                                把不同路由对应的组件分割成不同的代码块，然后当路由被访问的时候才加载对应组件
+                            </p>
+                            <p class="b">
+                                Vue异步组件<br>
+                                    &nbsp;&nbsp;&nbsp;{<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;components:{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;custom:(resolve,reject) => {}<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                    &nbsp;&nbsp;&nbsp;}<br>
+                                weboack代码分割功能<br>
+                                    &nbsp;&nbsp;&nbsp;require.ensure代码分块<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resolve(require(依赖,回调函数,[chunk名字]))<br>
+                                    &nbsp;&nbsp;&nbsp;import函数<br>
+                            </p>
+                        </li>
+                        <li>
+                            <span style="font-size: 20px;margin-left: 20px;">
+                                组件懒加载 (可ajax加载后)
+                            </span>
+                            <p class="b">
+                                components: {<br>
+                                    &nbsp;&nbsp;&nbsp;headerNav:(resolve) => {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setTimeout(() => {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resolve(require('@/components/header'))<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}, 2000)<br>
+                                    &nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
+                            </p>
+                            <span style="font-size: 20px;margin-left: 20px;">
+                                路由懒加载
+                            </span>
+                            <p class="b">
+                                let Layout = (resolve) => {<br>
+                                   &nbsp;&nbsp;&nbsp;return require.ensure([], () => {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resolve(require('@/views/layout'))<br>
+                                    &nbsp;&nbsp;&nbsp;})<br>
+                                }<br>
+                            </p>
+                            <span style="font-size: 20px;margin-left: 20px;">
+                                同时加载俩个(打包到一个js)
+                            </span>
+                            <p class="b">
+                                let Doc = (resolve) => {<br>
+                                    &nbsp;&nbsp;&nbsp;return require.ensure([], () => {<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resolve(require('@/views/backend/doc'))<br>
+                                    &nbsp;&nbsp;&nbsp;}, "abc")<br>
+                                }<br>
+                                let Workbench = (resolve) => {<br>
+                                    &nbsp;&nbsp;&nbsp;return require.ensure([], () => {<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resolve(require('@/views/backend/workbench'))<br>
+                                    &nbsp;&nbsp;&nbsp;}, "abc")<br>
+                                }<br>
+                            </p>
+                            <span style="font-size: 20px;margin-left: 20px;">
+                                import懒加载
+                            </span>
+                            <p class="b">
+                                let Doc = (resolve) => {<br>
+                                &nbsp;&nbsp;&nbsp;return import('@/views/backend/doc')<br>
+                                }<br>
+                            </p>
+                        </li>
+                    </ul>
+                     <h5>vue打包</h5>
+                    <p>
+                        命令行<br>
+                        npm run build<br>
+                        在config---index.js配置资源路径<br>
+                        <i style="color: #ccc">配置自己的路径</i><br>
+                        assetsPublicPath: '/dist',<br>
+                    </p>
+                </div>
+
+                <div class="vuex">
+                    <h5>vuex</h5>
                 </div>
 
             </div>

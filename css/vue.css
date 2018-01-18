@@ -235,7 +235,10 @@ p.a {
   margin-top: 20px;
   box-sizing: border-box; }
   .vue-router ul {
-    width: 100%; }
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 30px;
+    padding-top: 10px; }
     .vue-router ul:after {
       content: "";
       clear: both;
@@ -246,5 +249,10 @@ p.a {
       width: 50%;
       float: left; }
       .vue-router ul li:first-child {
-        border-right: 1px solid #ccc;
+        border-right: 1px solid #dedede;
         box-sizing: border-box; }
+      .vue-router ul li p.b {
+        text-indent: 0;
+        font-size: 16px; }
+        .vue-router ul li p.b i {
+          color: #ccc; }
