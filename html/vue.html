@@ -1342,13 +1342,37 @@
                         </li>
                     </ul>
                      <h5>vue打包</h5>
-                    <p>
-                        命令行<br>
-                        npm run build<br>
-                        在config---index.js配置资源路径<br>
-                        <i style="color: #ccc">配置自己的路径</i><br>
-                        assetsPublicPath: '/dist',<br>
-                    </p>
+                    <ul>
+                        <li>
+                            <p>
+                                命令行<br>
+                                npm run build<br>
+                                在config---index.js配置资源路径<br>
+                                <i style="color: #ccc">配置自己的路径</i><br>
+                                assetsPublicPath: '/dist/',<br>
+                                兼容IE<br>
+                                npm install --save babel-polyfill<br>
+                                main.js<br>
+                                import "babel-polyfill";
+                            </p>
+                        </li>
+                        <li>
+                            <h5 style="margin-left: 30px;">github/服务器</h5>
+                            <p>
+
+                                git add .<br>
+                                git commit -m '.....'<br>
+                                git remote  add origin https://github.com/zhaoqiangq/dist.git<br>
+                                报错commit<br>
+                                git config core.autocrif false<br>
+                                find / -name dist<br>
+                                cd ........<br>
+                                git clone https://github.com/zhaoqiangq/dist.git<br>
+                                git pull<br>
+                            </p>
+                        </li>
+                    </ul>
+
                 </div>
 
                 <div class="vuex">
